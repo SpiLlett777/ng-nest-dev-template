@@ -1,17 +1,15 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { SvgComponent } from '../svg/svg.component';
 import { SliderItemInterface } from '@sl/web/data-access/shared';
 
 @Component({
   selector: 'sl-images-slider',
-  imports: [CarouselModule, SvgComponent],
+  imports: [SvgComponent],
   templateUrl: './images-slider.component.html',
   styleUrl: './images-slider.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImagesSliderComponent {
-  options = input.required<OwlOptions>();
   slides = input.required<SliderItemInterface[]>();
   showNavigation = input(true);
 }

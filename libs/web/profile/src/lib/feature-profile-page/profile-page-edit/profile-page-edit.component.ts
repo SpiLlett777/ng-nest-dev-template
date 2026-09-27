@@ -39,7 +39,7 @@ export class ProfilePageEditComponent {
   readonly isSaving = signal(false);
   readonly statusMessage = signal<string | null>(null);
   readonly form = new FormGroup({
-    nickname: new FormControl('', {
+    username: new FormControl('', {
       nonNullable: true,
       validators: [
         Validators.required,
@@ -61,7 +61,7 @@ export class ProfilePageEditComponent {
       .subscribe({
         next: (account) => {
           this.form.patchValue({
-            nickname: account.nickname,
+            username: account.username ?? '',
             firstName: account.firstName ?? '',
             bio: account.bio ?? '',
           });
@@ -81,9 +81,22 @@ export class ProfilePageEditComponent {
     this.statusMessage.set(null);
     this.#profileService
       .updateMyAccount({
-        nickname: value.nickname.trim(),
+        username: value.username.trim() || null,
         firstName: value.firstName.trim() || null,
         bio: value.bio.trim() || null,
+        id: '',
+        email: '',
+        phone: null,
+        lastName: null,
+        middleName: null,
+        avatarUrl: null,
+        birthDate: null,
+        status: 'ACTIVE',
+        roles: [],
+        emailVerifiedAt: null,
+        phoneVerifiedAt: null,
+        createdAt: '',
+        updatedAt: '',
       })
       .pipe(
         finalize(() => this.isSaving.set(false)),
@@ -92,13 +105,13 @@ export class ProfilePageEditComponent {
       .subscribe({
         next: (account) => {
           this.#currentAccountStore.updateProfile({
-            nickname: account.nickname,
+            username: account.username ?? null,
             bio: account.bio ?? null,
           });
           this.#toastService.show(SuccessToastComponent, {
             message: 'Изменения профиля сохранены',
           });
-          void this.#router.navigate(['../maps'], {
+          void this.#router.navigate([''], {
             relativeTo: this.#route,
           });
         },

@@ -16,6 +16,7 @@ model User {
   passwordHash String  @map("password_hash")
 
   // Profile fields (M04.1, M02.1). Replaces old PersonalAccount.
+  username   String    @unique
   firstName  String?   @map("first_name")
   lastName   String?   @map("last_name")
   middleName String?   @map("middle_name")
@@ -39,7 +40,7 @@ model User {
   platformRoles UserPlatformRole[]
   memberships   Membership[]
   verifications Verification[]
-  auditLogs     AuditLog[] @relation("AuditActor")
+  auditLogs     AuditLog[]         @relation("AuditActor")
 
   @@index([status, createdAt])
   @@map("users")
@@ -99,10 +100,10 @@ enum PlatformRole {
 // ─── Organizations & team access (M02) ──────────────────────────────────
 
 model Organization {
-  id          String @id @default(uuid())
-  legalName   String @map("legal_name")
-  displayName String @map("display_name")
-  inn         String @unique
+  id          String           @id @default(uuid())
+  legalName   String           @map("legal_name")
+  displayName String           @map("display_name")
+  inn         String           @unique
   ogrn        String?
   kind        OrganizationKind
 
@@ -143,7 +144,7 @@ model Membership {
 
   role        MembershipRole
   // Fine-grained permissions on top of role, e.g. deal:sign, payout:approve.
-  permissions String[]        @default([])
+  permissions String[]         @default([])
   status      MembershipStatus @default(PENDING)
 
   invitedById String?   @map("invited_by_id")

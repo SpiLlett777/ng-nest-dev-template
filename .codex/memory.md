@@ -4,10 +4,6 @@ Updated: 2026-09-27. Keep this file short; update only on explicit user request.
 
 ## Working agreements
 
-- This is a fresh project. SportLink v1.0 was bootstrapped from the
-  GameMaster Helper Nx monorepo. Legacy domain code (maps, textures,
-  workshop, forum, old migrations, old seeds, domain assets) is being
-  removed, not reused.
 - Communicate in Russian. Follow AGENTS.md; do not duplicate its full rules
   here.
 - Experimental mode is active until explicitly canceled: no new tests or
@@ -116,10 +112,6 @@ Updated: 2026-09-27. Keep this file short; update only on explicit user request.
 
 ## Current status
 
-- Repository inherited from GameMaster Helper. Legacy cleanup (maps,
-  textures, workshop, forum, old migrations, old seeds, domain assets) is
-  in progress. Track the cleanup as a checklist before the first SportLink
-  feature. <!-- TODO -->
 - No SportLink domain code is implemented yet. Treat this file as the
   source of truth for agreed constraints until the first feature is merged.
 - Prisma schema is expected to be rewritten from scratch under

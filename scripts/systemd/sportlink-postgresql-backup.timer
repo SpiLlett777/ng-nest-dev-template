@@ -1,11 +1,11 @@
 [Unit]
-Description=Run GM Helper PostgreSQL backup daily
+Description=Run Sport Link PostgreSQL backup daily
 
 [Timer]
 OnCalendar=*-*-* 03:30:00
 Persistent=true
 RandomizedDelaySec=10m
-Unit=gmhelper-postgresql-backup.service
+Unit=sportlink-postgresql-backup.service
 
 [Install]
 WantedBy=timers.target

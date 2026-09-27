@@ -9,6 +9,7 @@ export type UserRole = (typeof UserRole)[keyof typeof UserRole];
 export const UserStatus = {
   active: 'ACTIVE',
   blocked: 'BLOCKED',
+  deleted: 'DELETED',
 } as const;
 
 export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus];

@@ -1,17 +1,9 @@
-<owl-carousel-o [options]="options()" #carousel>
-  @for (slide of slides(); track slide.url) {
-    <ng-template carouselSlide>
-      <img [src]="slide.url" [alt]="slide.alt || 'Превью изображения'" />
-    </ng-template>
-  }
-</owl-carousel-o>
-
 @if (showNavigation()) {
   <div class="carousel-arrows">
-    <button class="button-arrow arrow-prev" (click)="carousel.prev()">
+    <button class="button-arrow arrow-prev" (click)="null">
       <svg icon="arrow-tailless" class="svg16"></svg>
     </button>
-    <button class="button-arrow arrow-next" (click)="carousel.next()">
+    <button class="button-arrow arrow-next" (click)="null">
       <svg icon="arrow-tailless" class="svg16"></svg>
     </button>
   </div>

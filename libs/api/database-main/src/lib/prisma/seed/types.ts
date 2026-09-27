@@ -3,4 +3,5 @@ export interface SeedUserResult {
   username: string;
   nickname: string;
   email: string;
+  roles: string[];
 }

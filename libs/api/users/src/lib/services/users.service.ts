@@ -8,16 +8,30 @@ export class UsersService {
 
   async getMe(userId: number) {
     const user = await this.prisma.user.findUnique({
-      where: { id: userId },
+      where: { id: userId.toString() },
+      include: {
+        platformRoles: true,
+      },
     });
 
     if (!user) throw new NotFoundException('User not found');
 
     const result: UserResponseDto = {
+      avatarUrl: user.avatarUrl,
+      bio: user.bio,
+      birthDate: user.birthDate?.toDateString() ?? null,
+      createdAt: user.createdAt.toDateString(),
+      emailVerifiedAt: user.emailVerifiedAt?.toDateString() ?? null,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      middleName: user.middleName,
+      phone: user.phone,
+      phoneVerifiedAt: user.phoneVerifiedAt?.toDateString() ?? null,
+      updatedAt: '',
       id: user.id,
       email: user.email,
       username: user.username,
-      role: user.role,
+      roles: user.platformRoles.map((pr) => pr.role),
       status: user.status,
     };
 

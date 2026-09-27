@@ -2,7 +2,7 @@ import * as bcrypt from 'bcrypt';
 import { SeedPrismaClient } from './client';
 import { daysAgo } from './dates';
 import { SeedUserResult } from './types';
-import type { PlatformRole } from '../../generated/prisma';
+import type { PlatformRole } from '../../generated/prisma/enums';
 
 export const SEED_PASSWORD = 'Admin123';
 
@@ -167,19 +167,27 @@ export async function seedUsers(
         middleName: data.middleName ?? null,
         birthDate: data.birthDate ? new Date(data.birthDate) : null,
         bio: data.bio ?? null,
-        roles: data.roles,
+        platformRoles: {
+          create: data.roles.map((role) => ({
+            role: role,
+          })),
+        },
         termsVersion: '1.0',
         privacyVersion: '1.0',
         emailVerifiedAt: data.verified ? new Date() : null,
         createdAt: daysAgo(180 - index * 7),
       },
+      include: {
+        platformRoles: true,
+      },
     });
 
     result.push({
-      nickname: "", username: "",
+      nickname: '',
+      username: '',
       userId: Number(user.id),
       email: user.email,
-      roles: user.roles
+      roles: user.platformRoles.map((pr) => pr.role),
     });
   }
 

@@ -1,4 +1,4 @@
-
+import { DOCUMENT } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
 import { SEO_CONFIG } from './seo.token';
 import { SeoService } from './seo.service';
@@ -14,9 +14,9 @@ describe('SeoService', () => {
         {
           provide: SEO_CONFIG,
           useValue: {
-            siteName: 'GameMaster Helper',
-            siteUrl: 'https://gm-helper.ru/',
-            defaultImage: '/assets/imgs/new-logo.png',
+            siteName: 'SportLink',
+            siteUrl: 'https://sport-link.ru/',
+            defaultImage: '/assets/imgs/og-cover.png',
             locale: 'ru_RU',
           },
         },
@@ -29,31 +29,31 @@ describe('SeoService', () => {
   it('updates title, metadata and canonical URL', () => {
     service.update(
       {
-        title: 'Карты сообщества',
-        description: 'Каталог карт сообщества.',
+        title: 'Сделки',
+        description: 'Список сделок и этапов исполнения.',
         index: true,
-        canonicalPath: '/maps',
+        canonicalPath: '/deals',
       },
-      '/maps?page=2',
+      '/deals?page=2',
     );
 
-    expect(document.title).toBe('Карты сообщества | GameMaster Helper');
+    expect(document.title).toBe('Сделки | SportLink');
     expect(
       document
         .querySelector('meta[name="description"]')
         ?.getAttribute('content'),
-    ).toBe('Каталог карт сообщества.');
+    ).toBe('Список сделок и этапов исполнения.');
     expect(
       document.querySelector('meta[name="robots"]')?.getAttribute('content'),
     ).toBe('index, follow');
     expect(
       document.querySelector('link[rel="canonical"]')?.getAttribute('href'),
-    ).toBe('https://gm-helper.ru/maps');
+    ).toBe('https://sport-link.ru/deals');
     expect(
       document
         .querySelector('meta[property="og:url"]')
         ?.getAttribute('content'),
-    ).toBe('https://gm-helper.ru/maps');
+    ).toBe('https://sport-link.ru/deals');
   });
 
   it('reuses an existing canonical and removes stale structured data on navigation', () => {
@@ -62,30 +62,35 @@ describe('SeoService', () => {
         'link[rel="canonical"], script[type="application/ld+json"]',
       )
       .forEach((node) => node.remove());
+
     const canonical = document.createElement('link');
     canonical.rel = 'canonical';
-    canonical.href = 'https://gm-helper.ru/forum/3';
+    canonical.href = 'https://sport-link.ru/athletes/abc-123';
     document.head.appendChild(canonical);
+
     service.update(
       {
-        title: 'Тема',
-        description: 'Текст',
+        title: 'Профиль спортсмена',
+        description: 'Публичный профиль спортсмена.',
         index: true,
         structuredData: {
-          '@type': 'DiscussionForumPosting',
-          text: '</script>',
+          '@type': 'Person',
+          name: '</script>',
         },
       },
-      '/forum/3',
+      '/athletes/abc-123',
     );
+
     expect(document.querySelectorAll('link[rel="canonical"]')).toHaveLength(1);
     expect(
       document.querySelectorAll('script[type="application/ld+json"]'),
     ).toHaveLength(1);
+
     service.update(
-      { title: 'Карты', description: 'Каталог', index: true },
-      '/maps',
+      { title: 'Каталог', description: 'Каталог спортсменов.', index: true },
+      '/catalog',
     );
+
     expect(
       document.querySelectorAll('script[type="application/ld+json"]'),
     ).toHaveLength(0);

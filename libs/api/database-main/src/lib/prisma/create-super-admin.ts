@@ -10,7 +10,14 @@ const getRequiredEnv = (name: string) => {
 
 const createSuperAdmin = async () => {
   const existingSuperAdmin = await prisma.user.findFirst({
-    where: { role: 'SUPER_ADMIN' },
+    where: {
+      platformRoles: {
+        some: {
+          role: 'SUPER_ADMIN',
+          revokedAt: null,
+        },
+      },
+    },
     select: { email: true },
   });
 

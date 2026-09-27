@@ -124,7 +124,7 @@
     "webpack-cli": "^5.1.4"
   },
   "main": "index.js",
-  "repository": "https://github.com/gmhelper/maps-of-the-world.git",
+  "repository": "https://github.com/skillcode-dev/sport-link.git",
   "author": "Evgeniy Nazarov <zentorno.2000@mail.ru>",
   "license": "SEE LICENSE IN LICENSE",
   "packageManager": "yarn@4.17.0"

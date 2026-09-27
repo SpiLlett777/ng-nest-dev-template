@@ -1,13 +1,13 @@
 [Unit]
-Description=GM Helper local PostgreSQL backup
+Description=Sport Link local PostgreSQL backup
 Requires=postgresql.service
 After=postgresql.service
 
 [Service]
 Type=oneshot
 TimeoutStartSec=6h
-EnvironmentFile=-/etc/default/gmhelper-backup
-ExecStart=/usr/local/sbin/gmhelper-postgresql-backup
+EnvironmentFile=-/etc/default/sportlink-backup
+ExecStart=/usr/local/sbin/sportlink-postgresql-backup
 Nice=10
 IOSchedulingClass=best-effort
 IOSchedulingPriority=7

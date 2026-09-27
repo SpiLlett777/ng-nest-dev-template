@@ -2,12 +2,12 @@
 
 set -Eeuo pipefail
 
-readonly PROJECT_DIR='/opt/gm-helper/backend'
-readonly BACKUP_DIR='/var/backups/gm-helper/object-storage'
-readonly LOCK_FILE='/run/lock/gmhelper/maintenance.lock'
-readonly LOCK_WAIT_SECONDS="${GMHELPER_MAINTENANCE_LOCK_WAIT_SECONDS:-7200}"
-readonly MIN_FREE_KIB="${GMHELPER_BACKUP_MIN_FREE_KIB:-1048576}"
-readonly RETENTION_DAYS="${GMHELPER_OBJECT_STORAGE_BACKUP_RETENTION_DAYS:-14}"
+readonly PROJECT_DIR='/opt/sportlink/backend'
+readonly BACKUP_DIR='/var/backups/sportlink/object-storage'
+readonly LOCK_FILE='/run/lock/sportlink/maintenance.lock'
+readonly LOCK_WAIT_SECONDS="${SPORTLINK_MAINTENANCE_LOCK_WAIT_SECONDS:-7200}"
+readonly MIN_FREE_KIB="${SPORTLINK_BACKUP_MIN_FREE_KIB:-1048576}"
+readonly RETENTION_DAYS="${SPORTLINK_OBJECT_STORAGE_BACKUP_RETENTION_DAYS:-14}"
 readonly TIMESTAMP="$(date '+%Y-%m-%d_%H-%M-%S')"
 readonly TEMP_DIR="${BACKUP_DIR}/.${TIMESTAMP}.tmp"
 readonly SNAPSHOT_DIR="${BACKUP_DIR}/${TIMESTAMP}"

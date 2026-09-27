@@ -83,7 +83,7 @@ yarn build:web:prod [локально]
 ssh -i <путь к домашней директории пользователя>\.ssh\<название ключа> <имя пользователя на сервере>@<ip-адрес сервера> -p <порт> [локально]
 find /tmp/frontend-build -mindepth 1 -maxdepth 1 -exec rm -rf -- {} + [на сервере]
 scp -P <порт> -r dist/apps/web/browser/. <имя пользователя на сервере>@<ip-адрес сервера>:/tmp/frontend-build [локально]
-rsync -av --no-perms --delete /tmp/frontend-build/ /var/www/gmhelper-frontend/ [на сервере]
+rsync -av --no-perms --delete /tmp/frontend-build/ /var/www/sportlink-frontend/ [на сервере]
 ```
 
 Далее идёт более подробная инструкция.
@@ -126,32 +126,32 @@ scp -P <порт> -r dist/apps/web/browser/. <имя пользователя н
 ```bash
 rsync -av --no-perms --delete \
   /tmp/frontend-build/ \
-  /var/www/gmhelper-frontend/
+  /var/www/sportlink-frontend/
 ```
 
 Если команда `rsync` не найдена, воспользуйтесь альтернативой:
 
 ```bash
-find /var/www/gmhelper-frontend \
+find /var/www/sportlink-frontend \
   -mindepth 1 -maxdepth 1 \
   -exec rm -rf -- {} +
 
 cp -r /tmp/frontend-build/. \
-  /var/www/gmhelper-frontend/
+  /var/www/sportlink-frontend/
 ```
 
 Проверьте наличие перемещённых файлов и ассетов:
 
 ```bash
-ls -la /var/www/gmhelper-frontend
-find /var/www/gmhelper-frontend -type f -iname 'new-logo.png' -print
+ls -la /var/www/sportlink-frontend
+find /var/www/sportlink-frontend -type f -iname 'new-logo.png' -print
 ```
 
 Проверьте права каталогов, если в загруженном приложении в браузере не отображаются картинки (при наличии [настроенного Nginx](#настройка-nginx)):
 
 ```bash
-namei -l /var/www/gmhelper-frontend/assets
-namei -l /var/www/gmhelper-frontend/assets/imgs
+namei -l /var/www/sportlink-frontend/assets
+namei -l /var/www/sportlink-frontend/assets/imgs
 ```
 
 У каталогов в пути должны быть права прохода, например: `drwxr-xr-x`.
@@ -159,17 +159,17 @@ namei -l /var/www/gmhelper-frontend/assets/imgs
 Если статика загружена, но права ещё не исправлены:
 
 ```bash
-sudo chmod 755 /var/www/gmhelper-frontend/assets
-sudo chmod 755 /var/www/gmhelper-frontend/assets/imgs
+sudo chmod 755 /var/www/sportlink-frontend/assets
+sudo chmod 755 /var/www/sportlink-frontend/assets/imgs
 ```
 
 Если в браузере приложение отдаёт страницу с 403 ошибкой (при наличии [настроенного Nginx](#настройка-nginx)), выдайте директории фронтенда необходимые права:
 
 ```bash
-find /var/www/gmhelper-frontend -type d \
+find /var/www/sportlink-frontend -type d \
   -exec printf 'chmod 755 "%s"\n' {} \;
 
-find /var/www/gmhelper-frontend -type f \
+find /var/www/sportlink-frontend -type f \
   -exec printf 'chmod 644 "%s"\n' {} \;
 ```
 
@@ -197,7 +197,7 @@ sudo grep -RIn "gm-helper.ru" /etc/nginx
 Создайте конфигурацию Nginx, если таковой не было:
 
 ```bash
-sudo nano /etc/nginx/sites-available/gmhelper
+sudo nano /etc/nginx/sites-available/sportlink
 ```
 
 Настройте Nginx-конфигурацию.
@@ -216,8 +216,8 @@ Ctrl+X
 
 ```bash
 sudo ln -s \
-  /etc/nginx/sites-available/gmhelper \
-  /etc/nginx/sites-enabled/gmhelper
+  /etc/nginx/sites-available/sportlink \
+  /etc/nginx/sites-enabled/sportlink
 ```
 
 Проверьте:
@@ -229,7 +229,7 @@ ls -la /etc/nginx/sites-enabled/
 Должно появиться:
 
 ```bash
-gmhelper-frontend -> /etc/nginx/sites-available/gmhelper
+sportlink-frontend -> /etc/nginx/sites-available/sportlink
 ```
 
 Проверьте синтаксис конфигурации:
@@ -251,21 +251,21 @@ sudo systemctl reload nginx
 ├── sites-available/
 │   ├── default
 │   ├── default.backup
-│   └── gmhelper
+│   └── sportlink
 └── sites-enabled/
-    └── gmhelper -> /etc/nginx/sites-available/gmhelper
+    └── sportlink -> /etc/nginx/sites-available/sportlink
 ```
 
 Сам фронтенд находится здесь:
 
 ```bash
-/var/www/gmhelper-frontend
+/var/www/sportlink-frontend
 ```
 
 А новый сайт обрабатывается конфигом:
 
 ```bash
-/etc/nginx/sites-available/gmhelper
+/etc/nginx/sites-available/sportlink
 ```
 
 Проверка:
@@ -332,12 +332,12 @@ PostgreSQL и данные MinIO живут отдельно от образа A
 
 Команды выполняются на сервере из корня backend-репозитория
 `/opt/gm-helper/backend`. До обновления создайте резервные копии БД и объектного
-хранилища. `gmhelper-deploy` можно вызвать из любого каталога, но переход в
+хранилища. `sportlink-deploy` можно вызвать из любого каталога, но переход в
 корень нужен для следующих команд `docker compose`.
 
 ```bash
 cd /opt/gm-helper/backend
-gmhelper-deploy
+sportlink-deploy
 curl --fail --silent --show-error https://gm-helper.ru/api/health
 docker compose -f docker/docker-compose.prod.yml logs --tail=100 api
 docker image ls --filter dangling=true
@@ -345,7 +345,7 @@ docker image prune -f
 docker system df
 ```
 
-Только после намеренного force-push в `master`, если `gmhelper-deploy` не может
+Только после намеренного force-push в `master`, если `sportlink-deploy` не может
 выполнить fast-forward:
 
 ```bash
@@ -353,13 +353,13 @@ cd /opt/gm-helper/backend
 git status --short
 git fetch origin master
 git reset --hard origin/master
-gmhelper-deploy
+sportlink-deploy
 ```
 
 Перед `reset --hard` вывод `git status --short` должен быть пустым. При обычном
 обновлении этот блок не выполняйте.
 
-Команды очистки находятся после `gmhelper-deploy`: выполняйте их только если
+Команды очистки находятся после `sportlink-deploy`: выполняйте их только если
 deploy и healthcheck завершились успешно. На общем сервере не запускайте
 `docker system prune -a`, `docker volume prune` и
 `docker compose down --volumes`: эти команды могут затронуть другие проекты
@@ -374,7 +374,7 @@ deploy и healthcheck завершились успешно. На общем с�
 | Migrator             | одноразовый Docker-контейнер | нет                        |
 | PostgreSQL           | системный сервис             | `/var/lib/postgresql`      |
 | MinIO                | Docker                       | volume `docker_minio_data` |
-| Frontend             | `/var/www/gmhelper-frontend` | статическая сборка         |
+| Frontend             | `/var/www/sportlink-frontend` | статическая сборка         |
 
 MinIO не публикует порты `9000` и `9001` на хост. API доступен снаружи только
 через HTTPS reverse proxy. Node.js, Corepack и Yarn на сервер устанавливать не
@@ -439,7 +439,7 @@ sudo systemctl enable --now postgresql
 sudo systemctl status postgresql --no-pager
 ```
 
-Создайте отдельную роль `gmhelper_api` и базу `gmhelper_prod`:
+Создайте отдельную роль `sportlink_api` и базу `sportlink_prod`:
 
 ```bash
 sudo -u postgres psql
@@ -448,9 +448,9 @@ sudo -u postgres psql
 В консоли PostgreSQL:
 
 ```sql
-CREATE ROLE gmhelper_api LOGIN;
-\password gmhelper_api
-CREATE DATABASE gmhelper_prod OWNER gmhelper_api;
+CREATE ROLE sportlink_api LOGIN;
+\password sportlink_api
+CREATE DATABASE sportlink_prod OWNER sportlink_api;
 \q
 ```
 
@@ -461,7 +461,7 @@ CREATE DATABASE gmhelper_prod OWNER gmhelper_api;
 Проверьте локальное подключение:
 
 ```bash
-psql -h 127.0.0.1 -U gmhelper_api -d gmhelper_prod
+psql -h 127.0.0.1 -U sportlink_api -d sportlink_prod
 ```
 
 Выполните `\conninfo`, затем `\q`. Роль приложения не должна быть superuser.
@@ -485,14 +485,14 @@ sudo -u postgres psql -Atc "SHOW hba_file;"
 Добавьте в полученный `pg_hba.conf` одно правило для production-роли и базы:
 
 ```text
-host gmhelper_prod gmhelper_api 172.16.0.0/12 scram-sha-256
+host sportlink_prod sportlink_api 172.16.0.0/12 scram-sha-256
 ```
 
 Например:
 
 ```bash
 HBA_FILE="$(sudo -u postgres psql -Atc 'SHOW hba_file;')"
-grep -qxF 'host gmhelper_prod gmhelper_api 172.16.0.0/12 scram-sha-256' "$HBA_FILE" || echo 'host gmhelper_prod gmhelper_api 172.16.0.0/12 scram-sha-256' | sudo tee -a "$HBA_FILE"
+grep -qxF 'host sportlink_prod sportlink_api 172.16.0.0/12 scram-sha-256' "$HBA_FILE" || echo 'host sportlink_prod sportlink_api 172.16.0.0/12 scram-sha-256' | sudo tee -a "$HBA_FILE"
 sudo systemctl restart postgresql
 sudo ss -lntp | grep ':5432'
 ```
@@ -512,7 +512,7 @@ docker network inspect docker_default --format '{{range .IPAM.Config}}{{.Subnet}
 для Compose-сети `172.19.0.0/16` и gateway `172.17.0.1`:
 
 ```bash
-sudo ufw allow from 172.19.0.0/16 to 172.17.0.1 port 5432 proto tcp comment 'gmhelper Docker to PostgreSQL'
+sudo ufw allow from 172.19.0.0/16 to 172.17.0.1 port 5432 proto tcp comment 'sportlink Docker to PostgreSQL'
 ```
 
 Не копируйте пример буквально, если адреса отличаются. Если firewall
@@ -543,7 +543,7 @@ openssl rand -hex 32
 
 ```env
 NODE_ENV=production
-MAIN_DATABASE_URL=postgresql://gmhelper_api:<postgres-password>@host.docker.internal:5432/gmhelper_prod?schema=public
+MAIN_DATABASE_URL=postgresql://sportlink_api:<postgres-password>@host.docker.internal:5432/sportlink_prod?schema=public
 JWT_ACCESS_SECRET=<jwt-access-secret>
 JWT_REFRESH_SECRET=<different-jwt-refresh-secret>
 JWT_ACCESS_EXPIRES=15m
@@ -557,10 +557,10 @@ MAIN_API_PORT=3000
 OBJECT_STORAGE_ENDPOINT=http://minio:9000
 OBJECT_STORAGE_REGION=us-east-1
 OBJECT_STORAGE_BUCKET=maps-of-the-world-prod
-OBJECT_STORAGE_ACCESS_KEY=gmhelper-api
+OBJECT_STORAGE_ACCESS_KEY=sportlink-api
 OBJECT_STORAGE_SECRET_KEY=<minio-application-secret>
 OBJECT_STORAGE_FORCE_PATH_STYLE=true
-MINIO_ROOT_USER=gmhelper-admin
+MINIO_ROOT_USER=sportlink-admin
 MINIO_ROOT_PASSWORD=<different-minio-admin-secret>
 ```
 
@@ -590,7 +590,7 @@ migrator сообщает `P1001`, проверьте сеть и firewall:
 docker compose -f docker/docker-compose.prod.yml run --rm --no-deps --entrypoint sh migrate -c 'echo "HOST:"; getent hosts host.docker.internal; echo "ROUTES:"; ip route; echo "PORT:"; nc -vz -w 3 host.docker.internal 5432'
 ```
 
-Если возникает `P1000`, пароль роли `gmhelper_api` в PostgreSQL не совпадает с
+Если возникает `P1000`, пароль роли `sportlink_api` в PostgreSQL не совпадает с
 паролем внутри `MAIN_DATABASE_URL`. Исправьте пароль и пересоздайте контейнеры:
 
 ```bash
@@ -636,8 +636,8 @@ API. Затем API кратковременно останавливается,
 Для `mc` создайте временный root-only файл вне репозитория:
 
 ```bash
-sudo install -m 0600 -o root -g root /dev/null /root/gmhelper-storage-migration.env
-sudoedit /root/gmhelper-storage-migration.env
+sudo install -m 0600 -o root -g root /dev/null /root/sportlink-storage-migration.env
+sudoedit /root/sportlink-storage-migration.env
 ```
 
 Заполните его, не выводя секреты в терминал или историю команд:
@@ -659,7 +659,7 @@ DESTINATION_BUCKET=<destination-bucket>
 
 ```bash
 sudo docker run --rm --network docker_default \
-  --env-file /root/gmhelper-storage-migration.env \
+  --env-file /root/sportlink-storage-migration.env \
   --entrypoint /bin/sh quay.io/minio/mc:latest -c '
     mc alias set source "$SOURCE_ENDPOINT" "$SOURCE_ACCESS_KEY" "$SOURCE_SECRET_KEY" --api S3v4 &&
     mc alias set destination "$DESTINATION_ENDPOINT" "$DESTINATION_ACCESS_KEY" "$DESTINATION_SECRET_KEY" --api S3v4 &&
@@ -674,7 +674,7 @@ sudo docker run --rm --network docker_default \
 Перед миграцией временно остановите только расписание backup объектного хранилища:
 
 ```bash
-sudo systemctl stop gmhelper-object-storage-backup.timer
+sudo systemctl stop sportlink-object-storage-backup.timer
 ```
 
 PostgreSQL backup останавливать не требуется.
@@ -705,7 +705,7 @@ PostgreSQL backup останавливать не требуется.
 7. Запустите deployment без профиля MinIO:
 
    ```bash
-   GMHELPER_STORAGE_MODE=r2 gmhelper-deploy
+   SPORTLINK_STORAGE_MODE=r2 sportlink-deploy
    ```
 
 8. Проверьте healthcheck, старые изображения, загрузку и удаление тестового объекта.
@@ -745,7 +745,7 @@ PostgreSQL backup останавливать не требуется.
 
    ```bash
    docker compose -f docker/docker-compose.prod.yml --profile minio config --quiet
-   gmhelper-deploy
+   sportlink-deploy
    ```
 
 8. Проверьте healthcheck, старые изображения, загрузку и удаление тестового объекта.
@@ -758,13 +758,13 @@ PostgreSQL backup останавливать не требуется.
 ```bash
 sudo install -m 0750 -o root -g root \
   scripts/backup-object-storage-production.sh \
-  /usr/local/sbin/gmhelper-object-storage-backup
-sudo systemctl start gmhelper-object-storage-backup.service
-sudo systemctl status gmhelper-object-storage-backup.service --no-pager
-sudo journalctl -u gmhelper-object-storage-backup.service -n 100 --no-pager
-sudo systemctl start gmhelper-object-storage-backup.timer
-systemctl list-timers gmhelper-object-storage-backup.timer --all
-sudo rm -f /root/gmhelper-storage-migration.env
+  /usr/local/sbin/sportlink-object-storage-backup
+sudo systemctl start sportlink-object-storage-backup.service
+sudo systemctl status sportlink-object-storage-backup.service --no-pager
+sudo journalctl -u sportlink-object-storage-backup.service -n 100 --no-pager
+sudo systemctl start sportlink-object-storage-backup.timer
+systemctl list-timers sportlink-object-storage-backup.timer --all
+sudo rm -f /root/sportlink-storage-migration.env
 ```
 
 Не выполняйте `docker compose down --volumes`, `docker volume prune` или удаление
@@ -804,7 +804,7 @@ curl --fail --silent --show-error https://<domain>/api/health
 Проверьте миграции и постоянный volume:
 
 ```bash
-sudo -u postgres psql -d gmhelper_prod -c '\dt'
+sudo -u postgres psql -d sportlink_prod -c '\dt'
 docker volume inspect docker_minio_data --format '{{.Name}}: {{.Mountpoint}}'
 ```
 
@@ -959,29 +959,29 @@ reverse proxy.
 
 ```bash
 cd /opt/gm-helper/backend
-sudo install -m 0755 -o root -g root scripts/deploy-production.sh /usr/local/sbin/gmhelper-deploy
-sudo install -m 0644 -o root -g root scripts/systemd/gmhelper-maintenance.conf /etc/tmpfiles.d/gmhelper-maintenance.conf
-sudo systemd-tmpfiles --create /etc/tmpfiles.d/gmhelper-maintenance.conf
+sudo install -m 0755 -o root -g root scripts/deploy-production.sh /usr/local/sbin/sportlink-deploy
+sudo install -m 0644 -o root -g root scripts/systemd/sportlink-maintenance.conf /etc/tmpfiles.d/sportlink-maintenance.conf
+sudo systemd-tmpfiles --create /etc/tmpfiles.d/sportlink-maintenance.conf
 ```
 
 Пользователь, запускающий deploy, должен входить в группу `docker`. Обычное
 обновление с MinIO запускается без `sudo`:
 
 ```bash
-gmhelper-deploy
+sportlink-deploy
 ```
 
 Для Cloudflare R2:
 
 ```bash
-GMHELPER_STORAGE_MODE=r2 gmhelper-deploy
+SPORTLINK_STORAGE_MODE=r2 sportlink-deploy
 ```
 
 Скрипт ожидает освобождения lock до двух часов, требует чистое Git-дерево и не
 менее 5 ГиБ свободного места, выполняет только `git pull --ff-only`, проверяет
 Compose, migrator и `/api/health`. Он не удаляет старые образы автоматически.
 
-#### Что делает `gmhelper-deploy`
+#### Что делает `sportlink-deploy`
 
 1. Ожидает общий maintenance-lock, чтобы не пересечься с backup.
 2. Проверяет параметры запуска, чистоту Git-дерева и свободное место.
@@ -1018,7 +1018,7 @@ MinIO не останавливаются. При замене `api-prod` API м
 проверенного плана отката.
 
 Если история `master` была намеренно перезаписана через force-push, обычный
-`git pull --ff-only` и `gmhelper-deploy` безопасно завершатся с ошибкой до
+`git pull --ff-only` и `sportlink-deploy` безопасно завершатся с ошибкой до
 пересборки контейнеров. Синхронизируйте deployment-копию вручную:
 
 ```bash
@@ -1026,7 +1026,7 @@ cd /opt/gm-helper/backend
 git status --short
 git fetch origin master
 git reset --hard origin/master
-gmhelper-deploy
+sportlink-deploy
 ```
 
 Перед `reset --hard` вывод `git status --short` должен быть пустым. Команда
@@ -1110,37 +1110,37 @@ timers. Ошибка одного источника не блокирует з�
 
 ```bash
 cd /opt/gm-helper/backend
-sudo install -m 0750 -o root -g root scripts/backup-postgresql-production.sh /usr/local/sbin/gmhelper-postgresql-backup
-sudo install -m 0750 -o root -g root scripts/backup-object-storage-production.sh /usr/local/sbin/gmhelper-object-storage-backup
-sudo install -m 0644 -o root -g root scripts/systemd/gmhelper-postgresql-backup.service /etc/systemd/system/gmhelper-postgresql-backup.service
-sudo install -m 0644 -o root -g root scripts/systemd/gmhelper-postgresql-backup.timer /etc/systemd/system/gmhelper-postgresql-backup.timer
-sudo install -m 0644 -o root -g root scripts/systemd/gmhelper-object-storage-backup.service /etc/systemd/system/gmhelper-object-storage-backup.service
-sudo install -m 0644 -o root -g root scripts/systemd/gmhelper-object-storage-backup.timer /etc/systemd/system/gmhelper-object-storage-backup.timer
-sudo install -m 0644 -o root -g root scripts/systemd/gmhelper-maintenance.conf /etc/tmpfiles.d/gmhelper-maintenance.conf
+sudo install -m 0750 -o root -g root scripts/backup-postgresql-production.sh /usr/local/sbin/sportlink-postgresql-backup
+sudo install -m 0750 -o root -g root scripts/backup-object-storage-production.sh /usr/local/sbin/sportlink-object-storage-backup
+sudo install -m 0644 -o root -g root scripts/systemd/sportlink-postgresql-backup.service /etc/systemd/system/sportlink-postgresql-backup.service
+sudo install -m 0644 -o root -g root scripts/systemd/sportlink-postgresql-backup.timer /etc/systemd/system/sportlink-postgresql-backup.timer
+sudo install -m 0644 -o root -g root scripts/systemd/sportlink-object-storage-backup.service /etc/systemd/system/sportlink-object-storage-backup.service
+sudo install -m 0644 -o root -g root scripts/systemd/sportlink-object-storage-backup.timer /etc/systemd/system/sportlink-object-storage-backup.timer
+sudo install -m 0644 -o root -g root scripts/systemd/sportlink-maintenance.conf /etc/tmpfiles.d/sportlink-maintenance.conf
 sudo mkdir -p /var/backups/gm-helper
 sudo chmod 700 /var/backups/gm-helper
-printf 'GMHELPER_POSTGRES_BACKUP_RETENTION_DAYS=14\nGMHELPER_OBJECT_STORAGE_BACKUP_RETENTION_DAYS=14\nGMHELPER_MAINTENANCE_LOCK_WAIT_SECONDS=7200\nGMHELPER_BACKUP_MIN_FREE_KIB=1048576\n' | sudo tee /etc/default/gmhelper-backup
-sudo systemd-tmpfiles --create /etc/tmpfiles.d/gmhelper-maintenance.conf
+printf 'SPORTLINK_POSTGRES_BACKUP_RETENTION_DAYS=14\nSPORTLINK_OBJECT_STORAGE_BACKUP_RETENTION_DAYS=14\nSPORTLINK_MAINTENANCE_LOCK_WAIT_SECONDS=7200\nSPORTLINK_BACKUP_MIN_FREE_KIB=1048576\n' | sudo tee /etc/default/sportlink-backup
+sudo systemd-tmpfiles --create /etc/tmpfiles.d/sportlink-maintenance.conf
 sudo systemctl daemon-reload
 ```
 
 Ручной тест каждого backup обязателен:
 
 ```bash
-sudo systemctl start gmhelper-postgresql-backup.service
-sudo systemctl status gmhelper-postgresql-backup.service --no-pager
-sudo journalctl -u gmhelper-postgresql-backup.service -n 100 --no-pager
-sudo systemctl start gmhelper-object-storage-backup.service
-sudo systemctl status gmhelper-object-storage-backup.service --no-pager
-sudo journalctl -u gmhelper-object-storage-backup.service -n 100 --no-pager
+sudo systemctl start sportlink-postgresql-backup.service
+sudo systemctl status sportlink-postgresql-backup.service --no-pager
+sudo journalctl -u sportlink-postgresql-backup.service -n 100 --no-pager
+sudo systemctl start sportlink-object-storage-backup.service
+sudo systemctl status sportlink-object-storage-backup.service --no-pager
+sudo journalctl -u sportlink-object-storage-backup.service -n 100 --no-pager
 sudo find /var/backups/gm-helper -maxdepth 3 -printf '%M %u:%g %s %p\n'
 ```
 
 Только после успешного ручного теста включите расписание:
 
 ```bash
-sudo systemctl enable --now gmhelper-postgresql-backup.timer gmhelper-object-storage-backup.timer
-systemctl list-timers 'gmhelper-*-backup.timer' --all
+sudo systemctl enable --now sportlink-postgresql-backup.timer sportlink-object-storage-backup.timer
+systemctl list-timers 'sportlink-*-backup.timer' --all
 ```
 
 Структура каталога:
@@ -1178,16 +1178,16 @@ sudo find /var/backups/gm-helper -mindepth 2 -maxdepth 2 -printf '%TY-%Tm-%Td %T
 Проверить автозапуск, текущее состояние и расписание timers:
 
 ```bash
-systemctl is-enabled gmhelper-postgresql-backup.timer gmhelper-object-storage-backup.timer
-systemctl is-active gmhelper-postgresql-backup.timer gmhelper-object-storage-backup.timer
-systemctl list-timers 'gmhelper-*-backup.timer' --all
+systemctl is-enabled sportlink-postgresql-backup.timer sportlink-object-storage-backup.timer
+systemctl is-active sportlink-postgresql-backup.timer sportlink-object-storage-backup.timer
+systemctl list-timers 'sportlink-*-backup.timer' --all
 ```
 
 Проверить результат последних запусков и их журналы:
 
 ```bash
-sudo systemctl status gmhelper-postgresql-backup.service gmhelper-object-storage-backup.service --no-pager
-sudo journalctl -u gmhelper-postgresql-backup.service -u gmhelper-object-storage-backup.service -n 100 --no-pager
+sudo systemctl status sportlink-postgresql-backup.service sportlink-object-storage-backup.service --no-pager
+sudo journalctl -u sportlink-postgresql-backup.service -u sportlink-object-storage-backup.service -n 100 --no-pager
 ```
 
 Нормальное состояние timer — `enabled` и `active`. Backup-сервисы имеют тип
@@ -1207,72 +1207,72 @@ exit
 PostgreSQL запускается ежедневно около `03:30`, объектное хранилище — около
 `04:00`. `RandomizedDelaySec=10m` немного разносит нагрузку с другими задачами
 сервера. Сроки хранения настраиваются независимо в
-`/etc/default/gmhelper-backup`:
+`/etc/default/sportlink-backup`:
 
 ```env
-GMHELPER_POSTGRES_BACKUP_RETENTION_DAYS=14
-GMHELPER_OBJECT_STORAGE_BACKUP_RETENTION_DAYS=14
-GMHELPER_MAINTENANCE_LOCK_WAIT_SECONDS=7200
-GMHELPER_BACKUP_MIN_FREE_KIB=1048576
+SPORTLINK_POSTGRES_BACKUP_RETENTION_DAYS=14
+SPORTLINK_OBJECT_STORAGE_BACKUP_RETENTION_DAYS=14
+SPORTLINK_MAINTENANCE_LOCK_WAIT_SECONDS=7200
+SPORTLINK_BACKUP_MIN_FREE_KIB=1048576
 ```
 
 Например, для хранения в течение трёх суток укажите:
 
 ```env
-GMHELPER_POSTGRES_BACKUP_RETENTION_DAYS=3
-GMHELPER_OBJECT_STORAGE_BACKUP_RETENTION_DAYS=3
+SPORTLINK_POSTGRES_BACKUP_RETENTION_DAYS=3
+SPORTLINK_OBJECT_STORAGE_BACKUP_RETENTION_DAYS=3
 ```
 
 Новое значение применяется при следующем запуске соответствующего сервиса.
 Скрипты удаляют только свои backup-файлы и snapshot-каталоги старше указанного
 срока. Production-БД, MinIO, R2 и `docker_minio_data` они не удаляют.
 
-`GMHELPER_MAINTENANCE_LOCK_WAIT_SECONDS` задаёт максимальное ожидание общего
-lock, а `GMHELPER_BACKUP_MIN_FREE_KIB` — минимальный остаток свободного места
+`SPORTLINK_MAINTENANCE_LOCK_WAIT_SECONDS` задаёт максимальное ожидание общего
+lock, а `SPORTLINK_BACKUP_MIN_FREE_KIB` — минимальный остаток свободного места
 перед backup. Значение `1048576` соответствует 1 ГиБ. При недостатке места
 новая копия не создаётся, а существующие копии не удаляются.
 
-Оба backup-сервиса и `gmhelper-deploy` используют один exclusive lock. Поэтому
+Оба backup-сервиса и `sportlink-deploy` используют один exclusive lock. Поэтому
 они ожидают завершения уже запущенной операции и не меняют PostgreSQL, MinIO
 или контейнеры одновременно. Пользовательские записи API при этом не
 блокируются: `pg_dump` создаёт согласованный снимок, а `mc mirror` копирует
 только завершённые S3-объекты.
 
 При переходе с MinIO на R2 замените содержимое `docker/.env.object-storage.prod` и
-выполните ручной тест `gmhelper-object-storage-backup.service`. PostgreSQL timer
+выполните ручной тест `sportlink-object-storage-backup.service`. PostgreSQL timer
 и его настройки менять не требуется.
 
 Временно остановить расписание без удаления настроек:
 
 ```bash
-sudo systemctl stop gmhelper-postgresql-backup.timer gmhelper-object-storage-backup.timer
+sudo systemctl stop sportlink-postgresql-backup.timer sportlink-object-storage-backup.timer
 ```
 
 Снова запустить расписание:
 
 ```bash
-sudo systemctl start gmhelper-postgresql-backup.timer gmhelper-object-storage-backup.timer
+sudo systemctl start sportlink-postgresql-backup.timer sportlink-object-storage-backup.timer
 ```
 
 Полностью отключить автозапуск таймера:
 
 ```bash
-sudo systemctl disable --now gmhelper-postgresql-backup.timer gmhelper-object-storage-backup.timer
+sudo systemctl disable --now sportlink-postgresql-backup.timer sportlink-object-storage-backup.timer
 ```
 
 Остановить выполняющийся прямо сейчас backup:
 
 ```bash
-sudo systemctl stop gmhelper-postgresql-backup.service gmhelper-object-storage-backup.service
+sudo systemctl stop sportlink-postgresql-backup.service sportlink-object-storage-backup.service
 ```
 
 Полностью удалить автоматизацию backup, сохранив уже созданные копии:
 
 ```bash
-sudo systemctl disable --now gmhelper-postgresql-backup.timer gmhelper-object-storage-backup.timer
-sudo systemctl stop gmhelper-postgresql-backup.service gmhelper-object-storage-backup.service
-sudo rm -f /etc/systemd/system/gmhelper-postgresql-backup.timer /etc/systemd/system/gmhelper-postgresql-backup.service /etc/systemd/system/gmhelper-object-storage-backup.timer /etc/systemd/system/gmhelper-object-storage-backup.service
-sudo rm -f /usr/local/sbin/gmhelper-postgresql-backup /usr/local/sbin/gmhelper-object-storage-backup /etc/default/gmhelper-backup
+sudo systemctl disable --now sportlink-postgresql-backup.timer sportlink-object-storage-backup.timer
+sudo systemctl stop sportlink-postgresql-backup.service sportlink-object-storage-backup.service
+sudo rm -f /etc/systemd/system/sportlink-postgresql-backup.timer /etc/systemd/system/sportlink-postgresql-backup.service /etc/systemd/system/sportlink-object-storage-backup.timer /etc/systemd/system/sportlink-object-storage-backup.service
+sudo rm -f /usr/local/sbin/sportlink-postgresql-backup /usr/local/sbin/sportlink-object-storage-backup /etc/default/sportlink-backup
 sudo systemctl daemon-reload
 sudo systemctl reset-failed
 ```
@@ -1285,9 +1285,9 @@ sudo systemctl reset-failed
 sudo find /var/backups/gm-helper -maxdepth 3 -printf '%M %u:%g %s %p\n'
 ```
 
-Общий maintenance-lock нужен также для `gmhelper-deploy`, поэтому при удалении
-только backup-автоматизации не удаляйте `/etc/tmpfiles.d/gmhelper-maintenance.conf`
-и `/run/lock/gmhelper/maintenance.lock`.
+Общий maintenance-lock нужен также для `sportlink-deploy`, поэтому при удалении
+только backup-автоматизации не удаляйте `/etc/tmpfiles.d/sportlink-maintenance.conf`
+и `/run/lock/sportlink/maintenance.lock`.
 
 После изменения backup-скрипта повторите для него команду `install` и запустите
 ручной тест. Перезапускать timer не требуется. После изменения systemd unit
@@ -1299,7 +1299,7 @@ sudo find /var/backups/gm-helper -maxdepth 3 -printf '%M %u:%g %s %p\n'
   Docker gateway, `host.docker.internal` разрешается в нужный адрес и UFW
   разрешает Compose-подсеть к внутреннему порту `5432`.
 - **`P1000: Authentication failed`:** синхронизируйте пароль роли
-  `gmhelper_api` и пароль в `MAIN_DATABASE_URL`.
+  `sportlink_api` и пароль в `MAIN_DATABASE_URL`.
 - **Migrator завершился с ошибкой:** не запускайте API вручную в обход
   миграций. Исправьте причину и повторите Compose-команду.
 - **MinIO отвечает `Access Denied`:** проверьте `OBJECT_STORAGE_*` и повторите

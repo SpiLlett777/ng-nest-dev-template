@@ -33,6 +33,8 @@ import { filter, finalize, firstValueFrom, map } from 'rxjs';
 import { ProfileSummaryDto } from '@sl/shared/profiles';
 
 const emptySummary: ProfileSummaryDto = {
+  bio: '',
+  username: '',
   avatarUrl: null,
   createdAt: '2026-07-24T20:55:32.105Z',
 };
@@ -70,8 +72,7 @@ export class ProfilePageLayoutComponent {
   readonly profileId = this.#route.parent?.snapshot.paramMap.get('id') ?? 'me';
   readonly isOwnProfile = this.profileId === 'me';
 
-  /* TODO: Табы зависят от активного рабочего контекста.
-           Заполняется по мере готовности модулей */
+  // TODO: Табы зависят от активного рабочего контекста. Заполняется по мере готовности модулей
   readonly profileTabs: readonly TabItem[] = [
     { id: 'overview', label: 'Обзор', routerLink: ['overview'] },
     { id: 'deals', label: 'Сделки', routerLink: ['deals'] },

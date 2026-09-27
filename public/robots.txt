@@ -3,7 +3,5 @@ Allow: /
 Disallow: /login
 Disallow: /register
 Disallow: /profile/
-Disallow: /workshop
-Disallow: /*/edit
 
-Sitemap: https://gm-helper.ru/sitemap.xml
+Sitemap: https://sport-link.ru/sitemap.xml

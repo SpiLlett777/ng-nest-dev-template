@@ -1,16 +1,7 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SvgComponent } from '@sl/web/common-ui';
-import { MapsService, PublishedMapPage } from '@sl/web/data-access/maps';
-import { catchError, of } from 'rxjs';
-
-const EMPTY_MAP_PAGE: PublishedMapPage = {
-  items: [],
-  total: 0,
-  page: 1,
-  pageSize: 3,
-};
 
 @Component({
   selector: 'sl-home-page',
@@ -19,10 +10,4 @@ const EMPTY_MAP_PAGE: PublishedMapPage = {
   styleUrl: './home-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomePageComponent {
-  #mapsService = inject(MapsService);
-
-  protected readonly featuredMaps$ = this.#mapsService
-    .listCatalog(1, 3)
-    .pipe(catchError(() => of(EMPTY_MAP_PAGE)));
-}
+export class HomePageComponent {}

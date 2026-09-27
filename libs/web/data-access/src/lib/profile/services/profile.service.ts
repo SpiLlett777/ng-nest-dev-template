@@ -1,46 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {
-  AccountResponseDto,
-  ProfileSummaryDto,
-  UpdateAccountRequestDto,
-} from '@sl/shared/accounts';
-import { map } from 'rxjs';
 import { API_CONFIG } from '../../shared';
-import { PublishedMapSummary } from '../../maps';
-import {
-  TextureItem,
-  TextureItemView,
-  TexturePackAuthor,
-} from '../../texture-packs';
-
-export interface FavouriteMap extends PublishedMapSummary {
-  likedAt: string;
-}
-
-export interface FavouriteTexturePack {
-  id: string;
-  name: string;
-  description: string | null;
-  likesCount: number;
-  likedAt: string;
-  author: TexturePackAuthor;
-  previewTextures: TextureItemView[];
-  _count: { textures: number };
-}
-
-export interface Favourites {
-  maps: FavouriteMap[];
-  texturePacks: FavouriteTexturePack[];
-}
-
-interface FavouritesResponse extends Omit<Favourites, 'texturePacks'> {
-  texturePacks: Array<
-    Omit<FavouriteTexturePack, 'previewTextures'> & {
-      previewTextures: TextureItem[];
-    }
-  >;
-}
+import { ProfileSummaryDto } from '@sl/shared/profiles';
+import { UserResponseDto } from '@sl/shared/users';
 
 @Injectable({
   providedIn: 'root',
@@ -60,34 +22,13 @@ export class ProfileService {
   }
 
   getMyAccount() {
-    return this.#http.get<AccountResponseDto>(
+    return this.#http.get<UserResponseDto>(
       `${this.#apiConfig.baseUrl}accounts/me`,
     );
   }
 
-  getMyFavourites() {
-    return this.#http
-      .get<FavouritesResponse>(
-        `${this.#apiConfig.baseUrl}accounts/me/favourites`,
-      )
-      .pipe(
-        map(
-          (favourites): Favourites => ({
-            ...favourites,
-            texturePacks: favourites.texturePacks.map((pack) => ({
-              ...pack,
-              previewTextures: pack.previewTextures.map((texture) => ({
-                ...texture,
-                fileUrl: `${this.#apiConfig.baseUrl}textures/${texture.id}/file`,
-              })),
-            })),
-          }),
-        ),
-      );
-  }
-
-  updateMyAccount(account: UpdateAccountRequestDto) {
-    return this.#http.patch<AccountResponseDto>(
+  updateMyAccount(account: UserResponseDto) {
+    return this.#http.patch<UserResponseDto>(
       `${this.#apiConfig.baseUrl}accounts/me`,
       account,
     );

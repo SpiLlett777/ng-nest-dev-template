@@ -131,7 +131,7 @@ export class S3ObjectStorageService implements ObjectStorage {
     return fetch(requestUrl, {
       method,
       headers,
-      body,
+      body: body ? new Uint8Array(body) : undefined,
     });
   }
 

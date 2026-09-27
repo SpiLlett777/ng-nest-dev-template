@@ -5,7 +5,7 @@ describe('S3ObjectStorageService', () => {
   const config = {
     OBJECT_STORAGE_ENDPOINT: 'http://localhost:9000',
     OBJECT_STORAGE_REGION: 'us-east-1',
-    OBJECT_STORAGE_BUCKET: 'textures-dev',
+    OBJECT_STORAGE_BUCKET: 'sportlink-dev',
     OBJECT_STORAGE_ACCESS_KEY: 'access-key',
     OBJECT_STORAGE_SECRET_KEY: 'secret-key',
     OBJECT_STORAGE_FORCE_PATH_STYLE: 'true',
@@ -22,13 +22,15 @@ describe('S3ObjectStorageService', () => {
     const service = new S3ObjectStorageService(new ConfigService(config));
 
     await service.put({
-      key: 'account/texture name.png',
-      body: Buffer.from('texture'),
+      key: 'avatars/user-id/avatar name.png',
+      body: Buffer.from('image'),
       contentType: 'image/png',
     });
 
     expect(fetchSpy).toHaveBeenCalledWith(
-      new URL('http://localhost:9000/textures-dev/account/texture%20name.png'),
+      new URL(
+        'http://localhost:9000/sportlink-dev/avatars/user-id/avatar%20name.png',
+      ),
       expect.objectContaining({
         method: 'PUT',
         headers: expect.objectContaining({
@@ -42,7 +44,7 @@ describe('S3ObjectStorageService', () => {
   it('uses a virtual-hosted endpoint when path style is disabled', async () => {
     const fetchSpy = jest
       .spyOn(global, 'fetch')
-      .mockResolvedValue(new Response(Buffer.from('texture'), { status: 200 }));
+      .mockResolvedValue(new Response(Buffer.from('image'), { status: 200 }));
     const service = new S3ObjectStorageService(
       new ConfigService({
         ...config,
@@ -52,12 +54,12 @@ describe('S3ObjectStorageService', () => {
       }),
     );
 
-    await expect(service.get('texture.png')).resolves.toEqual(
-      Buffer.from('texture'),
+    await expect(service.get('avatars/default.png')).resolves.toEqual(
+      Buffer.from('image'),
     );
     expect(fetchSpy).toHaveBeenCalledWith(
       new URL(
-        'https://textures-dev.example.r2.cloudflarestorage.com/texture.png',
+        'https://sportlink-dev.example.r2.cloudflarestorage.com/avatars/default.png',
       ),
       expect.objectContaining({ method: 'GET' }),
     );
@@ -71,7 +73,7 @@ describe('S3ObjectStorageService', () => {
 
     await expect(service.checkAvailability()).resolves.toBeUndefined();
     expect(fetchSpy).toHaveBeenCalledWith(
-      new URL('http://localhost:9000/textures-dev/'),
+      new URL('http://localhost:9000/sportlink-dev/'),
       expect.objectContaining({ method: 'HEAD' }),
     );
   });

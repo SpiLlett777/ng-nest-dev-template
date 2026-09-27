@@ -3,69 +3,75 @@
     <div class="hero__glow" aria-hidden="true"></div>
     <div class="container hero__layout">
       <div class="hero__content">
-        <p class="eyebrow"><span></span> Карты, в которых начинаются истории</p>
+        <p class="eyebrow">
+          <span></span> Платформа для сделок спортсменов и брендов
+        </p>
         <h1 id="hero-title">
-          Создай мир,<br />
-          <em>который запомнят</em>
+          Спорт встречает<br />
+          <em>рекламодателя</em>
         </h1>
         <p class="hero__lead">
-          Собирайте атмосферные карты для настольных ролевых игр из готовых
-          текстур, делитесь ими с сообществом и ведите игроков навстречу
-          приключениям.
+          SportLink помогает описать рекламные возможности, подобрать
+          партнёра, согласовать условия, провести оплату и подтвердить
+          результат. Одна сделка — от брифа до закрывающих документов.
         </p>
         <div class="hero__actions">
-          <a class="button button--primary" routerLink="/workshop">
-            Открыть мастерскую
+          <!-- TODO: Маршрут /catalog появится по мере готовности -->
+          <a class="button button--primary" routerLink="/catalog">
+            Открыть каталог
             <svg icon="arrow" aria-hidden="true"></svg>
           </a>
-          <a class="button button--ghost" routerLink="/maps"
-            >Исследовать карты</a
+          <a class="button button--ghost" routerLink="/briefs"
+          >Смотреть брифы</a
           >
         </div>
-        <ul class="hero__proof" aria-label="Возможности редактора">
+        <ul class="hero__proof" aria-label="Возможности платформы">
           <li><span aria-hidden="true">✦</span> Работает в браузере</li>
-          <li><span aria-hidden="true">✦</span> Экспорт в высоком качестве</li>
+          <li>
+            <span aria-hidden="true">✦</span> Верификация и безопасная сделка
+          </li>
         </ul>
       </div>
 
-      <div class="atlas" aria-label="Интерактивный атлас возможностей">
+      <div class="atlas" aria-label="Интерактивная карта платформы">
         <div class="atlas__orbit atlas__orbit--outer" aria-hidden="true"></div>
         <div class="atlas__orbit atlas__orbit--inner" aria-hidden="true"></div>
         <div class="atlas__map">
+          <!-- TODO: Заменить на брендовое изображение -->
           <img
-            src="/assets/imgs/old-map-card.png"
+            src="/assets/imgs/hero-cover.png"
             width="590"
             height="590"
-            alt="Фэнтезийная карта, созданная в GameMaster Helper"
+            alt="SportLink — платформа для сделок спортсменов и рекламодателей"
           />
           <span class="atlas__fog" aria-hidden="true"></span>
           <a
             class="hotspot hotspot--one"
-            routerLink="/maps"
-            aria-label="Посмотреть карты сообщества"
+            routerLink="/catalog"
+            aria-label="Смотреть спортсменов"
           >
             <span></span>
-            <strong>Карты сообщества</strong>
+            <strong>Спортсмены</strong>
           </a>
           <a
             class="hotspot hotspot--two"
-            routerLink="/texture-packs"
-            aria-label="Открыть наборы текстур"
+            routerLink="/briefs"
+            aria-label="Смотреть брифы рекламодателей"
           >
             <span></span>
-            <strong>Текстур-паки</strong>
+            <strong>Брифы</strong>
           </a>
           <a
             class="hotspot hotspot--three"
-            routerLink="/workshop"
-            aria-label="Начать создание карты"
+            routerLink="/register"
+            aria-label="Начать работу"
           >
             <span></span>
             <strong>Начать здесь</strong>
           </a>
         </div>
         <div class="atlas__badge atlas__badge--top" aria-hidden="true">
-          <span>01</span> МИР СОЗДАН
+          <span>01</span> СДЕЛКА СОЗДАНА
         </div>
         <div class="atlas__badge atlas__badge--bottom" aria-hidden="true">
           <span>∞</span> ИСТОРИЙ ВПЕРЕДИ
@@ -74,40 +80,48 @@
     </div>
 
     <div class="container hero__stats" aria-label="Преимущества платформы">
-      <div><strong>4K</strong><span>экспорт карт</span></div>
-      <div><strong>∞</strong><span>пространство для идей</span></div>
-      <div><strong>1</strong><span>живое сообщество</span></div>
-      <p>От первого наброска<br />до целого мира</p>
+      <!-- TODO: Согласовать цифры с продуктом -->
+      <div><strong>13</strong><span>ролей участников</span></div>
+      <div><strong>25</strong><span>модулей платформы</span></div>
+      <div><strong>1</strong><span>управляемая сделка</span></div>
+      <p>От первой встречи<br />до закрывающих документов</p>
     </div>
   </section>
 
   <section class="story container" aria-labelledby="story-title">
     <header class="section-heading">
-      <p class="eyebrow"><span></span> Твой путь</p>
+      <p class="eyebrow"><span></span> Как это работает</p>
       <h2 id="story-title">
-        Всё необходимое,<br /><em>чтобы оживить идею</em>
+        Весь цикл сделки<br /><em>в одном месте</em>
       </h2>
     </header>
     <ol class="story__steps">
       <li>
         <span class="story__number">01</span>
         <div class="story__icon" aria-hidden="true">⌖</div>
-        <h3>Набросай мир</h3>
-        <p>Расставляй ландшафты, дороги и детали в удобном онлайн-редакторе.</p>
+        <h3>Опишите возможности</h3>
+        <p>
+          Спортсмен собирает профиль, услуги и календарь доступности.
+          Рекламодатель публикует бриф.
+        </p>
       </li>
       <li>
         <span class="story__number">02</span>
         <div class="story__icon" aria-hidden="true">◇</div>
-        <h3>Добавь атмосферу</h3>
+        <h3>Согласуйте условия</h3>
         <p>
-          Используй текстур-паки сообщества для любого сеттинга и настроения.
+          Переговоры, версии предложения, права на использование и
+          фиксированная смета — до подписания.
         </p>
       </li>
       <li>
         <span class="story__number">03</span>
         <div class="story__icon" aria-hidden="true">↗</div>
-        <h3>Поделись историей</h3>
-        <p>Публикуй работу, собирай отзывы и вдохновляй других мастеров.</p>
+        <h3>Исполните и подтвердите</h3>
+        <p>
+          Этапы, креативы, размещение, маркировка, приёмка и выплата — с
+          доказательствами на каждом шаге.
+        </p>
       </li>
     </ol>
   </section>
@@ -116,94 +130,49 @@
     <div class="container">
       <header class="section-heading section-heading--row">
         <div>
-          <p class="eyebrow"><span></span> Атлас сообщества</p>
+          <p class="eyebrow"><span></span> Каталог платформы</p>
           <h2 id="featured-title">
-            Миры, открытые<br /><em>для приключений</em>
+            Спортсмены, открытые<br /><em>для сотрудничества</em>
           </h2>
         </div>
-        <a class="text-link" routerLink="/maps"
-          >Смотреть весь каталог <span>→</span></a
+        <a class="text-link" routerLink="/catalog"
+        >Смотреть весь каталог <span>→</span></a
         >
       </header>
 
-      @if (featuredMaps$ | async; as mapsPage) {
-        @if (mapsPage.items.length) {
-          <div class="featured__grid">
-            @for (map of mapsPage.items; track map.id; let index = $index) {
-              <article
-                class="world-card"
-                [class.world-card--large]="index === 0"
-              >
-                <a
-                  routerLink="/workshop"
-                  [queryParams]="{ viewMapId: map.id }"
-                  class="world-card__visual"
-                >
-                  <img
-                    src="/assets/imgs/old-map-card.png"
-                    [alt]="'Карта «' + map.name + '»'"
-                  />
-                  <span class="world-card__index">0{{ index + 1 }}</span>
-                  <span class="world-card__open" aria-hidden="true">↗</span>
-                </a>
-                <div class="world-card__info">
-                  <div>
-                    <p>Автор: {{ map.author.nickname }}</p>
-                    <h3>
-                      <a
-                        routerLink="/workshop"
-                        [queryParams]="{ viewMapId: map.id }"
-                      >
-                        {{ map.name }}
-                      </a>
-                    </h3>
-                  </div>
-                  <dl>
-                    <div>
-                      <dt>Нравится</dt>
-                      <dd>♥ {{ map.likesCount }}</dd>
-                    </div>
-                    <div>
-                      <dt>Обсуждают</dt>
-                      <dd>{{ map.commentsCount }}</dd>
-                    </div>
-                  </dl>
-                </div>
-              </article>
-            }
-          </div>
-        } @else {
-          <div class="featured__empty">
-            <div class="featured__compass" aria-hidden="true">✦</div>
-            <div>
-              <h3>Атлас ждёт первооткрывателей</h3>
-              <p>
-                Создайте и опубликуйте карту — она может стать первой в
-                подборке.
-              </p>
-            </div>
-            <a class="button button--primary" routerLink="/workshop"
-              >Создать карту</a
-            >
-          </div>
-        }
-      }
+      <!--
+        TODO: Заменить статическую заглушку на данные из API, когда появится соответствующий сервис в libs/web/data-access.
+      -->
+      <div class="featured__empty">
+        <div class="featured__compass" aria-hidden="true">✦</div>
+        <div>
+          <h3>Каталог наполняется</h3>
+          <p>
+            Зарегистрируйтесь, заполните профиль спортсмена или создайте
+            бриф — ваша карточка появится в каталоге после верификации.
+          </p>
+        </div>
+        <a class="button button--primary" routerLink="/register"
+        >Создать аккаунт</a
+        >
+      </div>
     </div>
   </section>
 
   <section class="manifesto container" aria-labelledby="manifesto-title">
-    <div class="manifesto__mark" aria-hidden="true">GM</div>
+    <div class="manifesto__mark" aria-hidden="true">SL</div>
     <div>
-      <p class="eyebrow"><span></span> Для тех, кто ведёт за собой</p>
+      <p class="eyebrow"><span></span> Для тех, кто делает спорт видимым</p>
       <h2 id="manifesto-title">
-        Ваша история заслуживает<br /><em>собственного мира</em>
+        Ваш спорт заслуживает<br /><em>своего рекламодателя</em>
       </h2>
       <p>
-        Неважно, готовите ли вы первую игру или ведёте кампанию много лет.
-        GameMaster Helper освобождает время для главного — вашей истории.
+        Неважно, выступаете вы первый сезон или ведёте карьеру много лет.
+        SportLink освобождает время для главного — тренировок и выступлений,
+        а рутину сделки берёт на себя.
       </p>
-      <a class="button button--dark" routerLink="/workshop"
-        >Начать путешествие <span>→</span></a
+      <a class="button button--dark" routerLink="/register"
+      >Создать аккаунт <span>→</span></a
       >
     </div>
   </section>
