@@ -1,3 +1,3 @@
 export interface ApiConfig {
-  baseUrl: string;
+	baseUrl: string;
 }

@@ -1,37 +1,37 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  output,
-  viewChild,
+	ChangeDetectionStrategy,
+	Component,
+	input,
+	output,
+	viewChild,
 } from '@angular/core';
 import { ToastBaseComponent } from '../toast-base/toast-base.component';
 import { ToastComponent } from '../toast.interface';
 
 @Component({
-  selector: 'sl-info-toast',
-  imports: [ToastBaseComponent],
-  templateUrl: './info-toast.component.html',
-  styleUrl: './info-toast.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+	selector: 'sl-info-toast',
+	imports: [ToastBaseComponent],
+	templateUrl: './info-toast.component.html',
+	styleUrl: './info-toast.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfoToastComponent implements ToastComponent {
-  base = viewChild.required(ToastBaseComponent);
+	base = viewChild.required(ToastBaseComponent);
 
-  message = input('');
+	message = input('');
 
-  closed = output<void>();
+	closed = output<void>();
 
-  show() {
-    this.base().setVisible();
-  }
+	show() {
+		this.base().setVisible();
+	}
 
-  hide(done: VoidFunction) {
-    this.base().setHidden(done);
-  }
+	hide(done: VoidFunction) {
+		this.base().setHidden(done);
+	}
 
-  onCloseClick(event: MouseEvent) {
-    event.stopPropagation();
-    this.closed.emit();
-  }
+	onCloseClick(event: MouseEvent) {
+		event.stopPropagation();
+		this.closed.emit();
+	}
 }

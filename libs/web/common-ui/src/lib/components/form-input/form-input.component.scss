@@ -2,67 +2,67 @@
 @use 'media' as *;
 
 :host {
-  &.ng-invalid.ng-touched {
-    .control-error-block__wrapper {
-      display: block;
-    }
+	&.ng-invalid.ng-touched {
+		.control-error-block__wrapper {
+			display: block;
+		}
 
-    .form-input {
-      border-color: var(--red-color);
-    }
-  }
+		.form-input {
+			border-color: var(--red-color);
+		}
+	}
 }
 
 .form-input {
-  width: 100%;
-  height: rem(32);
-  color: var(--text-primary-color);
-  background-color: var(--bg-input-color);
-  border: rem(1) solid var(--border-input-color);
-  border-radius: rem(10);
-  padding: rem(9);
-  font-size: rem(13);
-  outline: none;
+	width: 100%;
+	height: rem(32);
+	color: var(--text-primary-color);
+	background-color: var(--bg-input-color);
+	border: rem(1) solid var(--border-input-color);
+	border-radius: rem(10);
+	padding: rem(9);
+	font-size: rem(13);
+	outline: none;
 
-  &::placeholder {
-    color: var(--text-input-placeholder-color);
-  }
+	&::placeholder {
+		color: var(--text-input-placeholder-color);
+	}
 
-  @include tablet {
-    padding: rem(9) rem(14);
-  }
+	@include tablet {
+		padding: rem(9) rem(14);
+	}
 
-  &_with-action {
-    padding-right: rem(38);
-  }
+	&_with-action {
+		padding-right: rem(38);
+	}
 }
 
 .form-input-wrapper {
-  position: relative;
+	position: relative;
 }
 
 .password-toggle {
-  position: absolute;
-  top: 50%;
-  right: rem(9);
-  display: grid;
-  place-items: center;
-  width: rem(24);
-  height: rem(24);
-  padding: 0;
-  border: 0;
-  color: var(--text-input-placeholder-color);
-  background: transparent;
-  cursor: pointer;
-  transform: translateY(-50%);
+	position: absolute;
+	top: 50%;
+	right: rem(9);
+	display: grid;
+	place-items: center;
+	width: rem(24);
+	height: rem(24);
+	padding: 0;
+	border: 0;
+	color: var(--text-input-placeholder-color);
+	background: transparent;
+	cursor: pointer;
+	transform: translateY(-50%);
 
-  &:hover,
-  &:focus-visible {
-    color: var(--text-primary-color);
-  }
+	&:hover,
+	&:focus-visible {
+		color: var(--text-primary-color);
+	}
 
-  &:disabled {
-    cursor: default;
-    opacity: 0.5;
-  }
+	&:disabled {
+		cursor: default;
+		opacity: 0.5;
+	}
 }

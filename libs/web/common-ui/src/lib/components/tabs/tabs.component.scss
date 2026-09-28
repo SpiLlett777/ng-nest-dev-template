@@ -2,62 +2,62 @@
 @use 'media' as *;
 
 :host {
-  display: block;
-  max-width: 100%;
+	display: block;
+	max-width: 100%;
 }
 
 .tabs {
-  overflow-x: auto;
-  scrollbar-width: none;
+	overflow-x: auto;
+	scrollbar-width: none;
 }
 
 .tabs::-webkit-scrollbar {
-  display: none;
+	display: none;
 }
 
 .tabs__list {
-  display: flex;
-  gap: rem(4);
-  width: 100%;
-  min-width: max-content;
-  margin: 0;
-  padding: rem(4);
-  border-radius: rem(12);
-  background-color: var(--tabs-bg-color);
-  list-style: none;
+	display: flex;
+	gap: rem(4);
+	width: 100%;
+	min-width: max-content;
+	margin: 0;
+	padding: rem(4);
+	border-radius: rem(12);
+	background-color: var(--tabs-bg-color);
+	list-style: none;
 }
 
 .tabs__item {
-  flex: 1 0 0;
+	flex: 1 0 0;
 
-  @include mobile {
-    flex-basis: auto;
-  }
+	@include mobile {
+		flex-basis: auto;
+	}
 }
 
 .tabs__control {
-  display: block;
-  width: 100%;
-  padding: fluid(8, 7) fluid(20, 18);
-  border: 0;
-  border-radius: rem(8);
-  color: var(--tabs-text-color);
-  background: transparent;
-  font-family: 'Play', sans-serif;
-  font-size: fluid(16, 14);
-  line-height: 1.3125;
-  text-align: center;
-  text-decoration: none;
-  white-space: nowrap;
-  cursor: pointer;
+	display: block;
+	width: 100%;
+	padding: fluid(8, 7) fluid(20, 18);
+	border: 0;
+	border-radius: rem(8);
+	color: var(--tabs-text-color);
+	background: transparent;
+	font-family: 'Play', sans-serif;
+	font-size: fluid(16, 14);
+	line-height: 1.3125;
+	text-align: center;
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
 
-  transition:
-    background-color 0.2s,
-    color 0.2s;
+	transition:
+		background-color 0.2s,
+		color 0.2s;
 }
 
 .tabs__control:hover,
 .tabs__control--active {
-  color: var(--tabs-active-text-color);
-  background-color: var(--tabs-active-bg-color);
+	color: var(--tabs-active-text-color);
+	background-color: var(--tabs-active-bg-color);
 }

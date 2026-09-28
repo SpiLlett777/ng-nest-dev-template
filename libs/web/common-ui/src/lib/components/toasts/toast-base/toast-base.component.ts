@@ -1,29 +1,29 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 
 @Component({
-  selector: 'sl-toast-base',
-  imports: [],
-  templateUrl: './toast-base.component.html',
-  styleUrl: './toast-base.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+	selector: 'sl-toast-base',
+	imports: [],
+	templateUrl: './toast-base.component.html',
+	styleUrl: './toast-base.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToastBaseComponent {
-  open = signal(false);
-  onHideCompleted: VoidFunction | null = null;
+	open = signal(false);
+	onHideCompleted: VoidFunction | null = null;
 
-  setVisible(): void {
-    this.open.set(true);
-  }
+	setVisible(): void {
+		this.open.set(true);
+	}
 
-  setHidden(done: VoidFunction): void {
-    this.onHideCompleted = done;
-    this.open.set(false);
-  }
+	setHidden(done: VoidFunction): void {
+		this.onHideCompleted = done;
+		this.open.set(false);
+	}
 
-  onTransitionEnd(): void {
-    if (this.open() || !this.onHideCompleted) return;
+	onTransitionEnd(): void {
+		if (this.open() || !this.onHideCompleted) return;
 
-    this.onHideCompleted();
-    this.onHideCompleted = null;
-  }
+		this.onHideCompleted();
+		this.onHideCompleted = null;
+	}
 }

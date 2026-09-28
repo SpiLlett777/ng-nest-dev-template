@@ -4,60 +4,60 @@ import { By } from '@angular/platform-browser';
 import { PopoverComponent } from './popover.component';
 
 @Component({
-  imports: [PopoverComponent],
-  template: `
-    <sl-popover>
-      <button slPopoverTrigger type="button">Open</button>
-      <a slPopoverContent href="/">Profile</a>
-    </sl-popover>
-  `,
+	imports: [PopoverComponent],
+	template: `
+		<sl-popover>
+			<button slPopoverTrigger type="button">Open</button>
+			<a slPopoverContent href="/">Profile</a>
+		</sl-popover>
+	`,
 })
 class TestHostComponent {}
 
 describe('PopoverComponent', () => {
-  let fixture: ComponentFixture<TestHostComponent>;
+	let fixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [TestHostComponent],
-    }).compileComponents();
-    fixture = TestBed.createComponent(TestHostComponent);
-    fixture.detectChanges();
-  });
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			imports: [TestHostComponent],
+		}).compileComponents();
+		fixture = TestBed.createComponent(TestHostComponent);
+		fixture.detectChanges();
+	});
 
-  it('opens from its trigger and closes after a content click', () => {
-    fixture.debugElement
-      .query(By.css('.popover-trigger'))
-      .triggerEventHandler('click');
-    fixture.detectChanges();
+	it('opens from its trigger and closes after a content click', () => {
+		fixture.debugElement
+			.query(By.css('.popover-trigger'))
+			.triggerEventHandler('click');
+		fixture.detectChanges();
 
-    expect(fixture.debugElement.query(By.css('.popover-panel'))).toBeTruthy();
+		expect(fixture.debugElement.query(By.css('.popover-panel'))).toBeTruthy();
 
-    fixture.debugElement
-      .query(By.css('.popover-panel'))
-      .triggerEventHandler('click');
-    fixture.detectChanges();
+		fixture.debugElement
+			.query(By.css('.popover-panel'))
+			.triggerEventHandler('click');
+		fixture.detectChanges();
 
-    expect(fixture.debugElement.query(By.css('.popover-panel'))).toBeNull();
-  });
+		expect(fixture.debugElement.query(By.css('.popover-panel'))).toBeNull();
+	});
 
-  it('closes on Escape', () => {
-    const popover = fixture.debugElement
-      .query(By.directive(PopoverComponent))
-      .injector.get(PopoverComponent);
-    popover.toggle();
-    popover.onEscape();
+	it('closes on Escape', () => {
+		const popover = fixture.debugElement
+			.query(By.directive(PopoverComponent))
+			.injector.get(PopoverComponent);
+		popover.toggle();
+		popover.onEscape();
 
-    expect(popover.isOpen()).toBe(false);
-  });
+		expect(popover.isOpen()).toBe(false);
+	});
 
-  it('closes on a pointer event outside', () => {
-    const popover = fixture.debugElement
-      .query(By.directive(PopoverComponent))
-      .injector.get(PopoverComponent);
-    popover.toggle();
-    document.body.dispatchEvent(new Event('pointerdown', { bubbles: true }));
+	it('closes on a pointer event outside', () => {
+		const popover = fixture.debugElement
+			.query(By.directive(PopoverComponent))
+			.injector.get(PopoverComponent);
+		popover.toggle();
+		document.body.dispatchEvent(new Event('pointerdown', { bubbles: true }));
 
-    expect(popover.isOpen()).toBe(false);
-  });
+		expect(popover.isOpen()).toBe(false);
+	});
 });

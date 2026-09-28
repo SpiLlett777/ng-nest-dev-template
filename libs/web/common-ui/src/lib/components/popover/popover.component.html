@@ -1,27 +1,27 @@
 <div slClickOutside (slClickOutside)="close()" class="popover-root">
-  <div
-    (click)="toggle()"
-    (keydown.escape)="close()"
-    class="popover-trigger"
-    tabindex="-1"
-  >
-    <ng-content select="[slPopoverTrigger]"></ng-content>
-  </div>
+	<div
+		(click)="toggle()"
+		(keydown.escape)="close()"
+		class="popover-trigger"
+		tabindex="-1"
+	>
+		<ng-content select="[slPopoverTrigger]"></ng-content>
+	</div>
 
-  @if (isOpen()) {
-    <div
-      [class]="'popover-panel popover-panel--' + alignment()"
-      [class.popover-panel--bare]="appearance() === 'bare'"
-      [class.popover-panel--fixed]="position()"
-      [style.left.px]="position()?.x"
-      [style.top.px]="position()?.y"
-      [attr.aria-label]="ariaLabel()"
-      (click)="onContentClick()"
-      (keydown.escape)="close()"
-      tabindex="-1"
-      role="menu"
-    >
-      <ng-content select="[slPopoverContent]"></ng-content>
-    </div>
-  }
+	@if (isOpen()) {
+		<div
+			[class]="'popover-panel popover-panel--' + alignment()"
+			[class.popover-panel--bare]="appearance() === 'bare'"
+			[class.popover-panel--fixed]="position()"
+			[style.left.px]="position()?.x"
+			[style.top.px]="position()?.y"
+			[attr.aria-label]="ariaLabel()"
+			(click)="onContentClick()"
+			(keydown.escape)="close()"
+			tabindex="-1"
+			role="menu"
+		>
+			<ng-content select="[slPopoverContent]"></ng-content>
+		</div>
+	}
 </div>

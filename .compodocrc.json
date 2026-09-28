@@ -1,9 +1,10 @@
 {
-  "tsconfig": "./tsconfig.compodoc.json",
-  "output": "./documentation",
-  "name": "Sport Link",
-  "basePath": ".",
-  "disableCoverage": false,
-  "disablePrivate": false,
-  "disableRoutes": false
+	"tsconfig": "./tsconfig.compodoc.json",
+	"output": "./documentation",
+	"name": "Sport Link",
+	"basePath": ".",
+	"disableCoverage": false,
+	"disablePrivate": false,
+	"disableRoutes": false,
+	"disableRoutesGraph": true
 }

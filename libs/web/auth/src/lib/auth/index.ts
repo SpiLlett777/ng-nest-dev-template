@@ -4,8 +4,8 @@ import { authInitializer } from './auth-initializer';
 import { authInterceptor } from './auth.interceptor';
 
 export {
-  canActivateAuth,
-  canActivateNonAuth,
-  authInterceptor,
-  authInitializer,
+	canActivateAuth,
+	canActivateNonAuth,
+	authInterceptor,
+	authInitializer,
 };

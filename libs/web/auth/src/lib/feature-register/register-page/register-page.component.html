@@ -1,62 +1,62 @@
 <form class="register-form" [formGroup]="registerForm" (ngSubmit)="register()">
-  <h1 class="registration-header">Регистрация</h1>
+	<h1 class="registration-header">Регистрация</h1>
 
-  <div class="registration-body">
-    <sl-labeled-form-field-wrapper label="Имя">
-      <sl-form-input placeholder="Введите имя" formControlName="username">
-        <div class="control-error-block" errorBlock>
-          <span class="control-error-text">{{
-            registerForm.controls.username.getError(
-              authConfig.username.errorName
-            )?.message
-          }}</span>
-        </div>
-      </sl-form-input>
-    </sl-labeled-form-field-wrapper>
+	<div class="registration-body">
+		<sl-labeled-form-field-wrapper label="Имя">
+			<sl-form-input placeholder="Введите имя" formControlName="username">
+				<div class="control-error-block" errorBlock>
+					<span class="control-error-text">{{
+						registerForm.controls.username.getError(
+							authConfig.username.errorName
+						)?.message
+					}}</span>
+				</div>
+			</sl-form-input>
+		</sl-labeled-form-field-wrapper>
 
-    <sl-labeled-form-field-wrapper label="Адрес электронной почты">
-      <sl-form-input
-        placeholder="Введите адрес электронной почты"
-        formControlName="email"
-      >
-        <div class="control-error-block" errorBlock>
-          <span class="control-error-text">{{
-            registerForm.controls.email.getError(authConfig.email.errorName)
-              ?.message
-          }}</span>
-        </div>
-      </sl-form-input>
-    </sl-labeled-form-field-wrapper>
+		<sl-labeled-form-field-wrapper label="Адрес электронной почты">
+			<sl-form-input
+				placeholder="Введите адрес электронной почты"
+				formControlName="email"
+			>
+				<div class="control-error-block" errorBlock>
+					<span class="control-error-text">{{
+						registerForm.controls.email.getError(authConfig.email.errorName)
+							?.message
+					}}</span>
+				</div>
+			</sl-form-input>
+		</sl-labeled-form-field-wrapper>
 
-    <sl-labeled-form-field-wrapper label="Пароль">
-      <sl-form-input
-        placeholder="Введите пароль"
-        type="password"
-        [showPasswordToggle]="true"
-        formControlName="password"
-      >
-        <div class="control-error-block" errorBlock>
-          <span class="control-error-text">{{
-            registerForm.controls.password.getError(
-              authConfig.password.errorName
-            )?.message
-          }}</span>
-        </div>
-      </sl-form-input>
-    </sl-labeled-form-field-wrapper>
+		<sl-labeled-form-field-wrapper label="Пароль">
+			<sl-form-input
+				placeholder="Введите пароль"
+				type="password"
+				[showPasswordToggle]="true"
+				formControlName="password"
+			>
+				<div class="control-error-block" errorBlock>
+					<span class="control-error-text">{{
+						registerForm.controls.password.getError(
+							authConfig.password.errorName
+						)?.message
+					}}</span>
+				</div>
+			</sl-form-input>
+		</sl-labeled-form-field-wrapper>
 
-    <sl-labeled-checkbox
-      label="Я согласен с политикой конфиденциальности"
-    ></sl-labeled-checkbox>
+		<sl-labeled-checkbox
+			label="Я согласен с политикой конфиденциальности"
+		></sl-labeled-checkbox>
 
-    <button class="button" type="submit">Зарегистрироваться</button>
-  </div>
+		<button class="button" type="submit">Зарегистрироваться</button>
+	</div>
 
-  <p class="register-link">
-    Уже есть аккаунт?&nbsp;<a
-      [routerLink]="['/login']"
-      queryParamsHandling="preserve"
-      >Войти</a
-    >
-  </p>
+	<p class="register-link">
+		Уже есть аккаунт?&nbsp;<a
+			[routerLink]="['/login']"
+			queryParamsHandling="preserve"
+			>Войти</a
+		>
+	</p>
 </form>

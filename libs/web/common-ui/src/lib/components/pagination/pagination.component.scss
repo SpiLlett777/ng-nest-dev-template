@@ -3,90 +3,90 @@
 @use 'mixins' as *;
 
 :host {
-  @include flex-center();
-  color: var(--text-primary-color);
-  gap: rem(10);
-  font-family: 'Play', sans-serif;
-  font-weight: 400;
-  @include fluid-text(22, 14);
-  line-height: rem(16);
-  height: fluid(25, 16);
+	@include flex-center();
+	color: var(--text-primary-color);
+	gap: rem(10);
+	font-family: 'Play', sans-serif;
+	font-weight: 400;
+	@include fluid-text(22, 14);
+	line-height: rem(16);
+	height: fluid(25, 16);
 
-  @include mobile {
-    gap: rem(12);
-  }
+	@include mobile {
+		gap: rem(12);
+	}
 
-  &.pagination-header {
-    color: var(--text-light-color);
+	&.pagination-header {
+		color: var(--text-light-color);
 
-    .svg {
-      color: inherit;
-    }
+		.svg {
+			color: inherit;
+		}
 
-    .pagination-number {
-      color: inherit;
+		.pagination-number {
+			color: inherit;
 
-      &.active {
-        background-color: var(--btn-primary-bg-color);
-        color: var(--btn-primary-text-color);
-      }
-    }
-  }
+			&.active {
+				background-color: var(--btn-primary-bg-color);
+				color: var(--btn-primary-text-color);
+			}
+		}
+	}
 }
 
 .arrow-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: rem(5);
-  margin: rem(-5);
-  color: inherit;
-  @include flex-center();
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: rem(5);
+	margin: rem(-5);
+	color: inherit;
+	@include flex-center();
 
-  &:disabled {
-    cursor: default;
-    opacity: 0.3;
-  }
+	&:disabled {
+		cursor: default;
+		opacity: 0.3;
+	}
 }
 
 .svg {
-  position: relative;
-  top: rem(1);
-  fill: currentColor;
+	position: relative;
+	top: rem(1);
+	fill: currentColor;
 }
 
 .next-page-icon {
-  transform: rotateY(180deg);
+	transform: rotateY(180deg);
 }
 
 .pagination-numbers {
-  @include flex-center();
-  gap: rem(4);
+	@include flex-center();
+	gap: rem(4);
 }
 
 .pagination-number {
-  @include square(fluid(35, 26));
-  @include flex-center();
-  text-align: center;
-  border: none;
-  background: none;
-  border-radius: 50%;
-  cursor: pointer;
-  color: inherit;
-  font-family: inherit;
-  font-weight: inherit;
-  font-size: inherit;
+	@include square(fluid(35, 26));
+	@include flex-center();
+	text-align: center;
+	border: none;
+	background: none;
+	border-radius: 50%;
+	cursor: pointer;
+	color: inherit;
+	font-family: inherit;
+	font-weight: inherit;
+	font-size: inherit;
 
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
+	transition:
+		background-color 0.2s ease,
+		color 0.2s ease;
 
-  &:hover:not(.active) {
-    background-color: rgb(from var(--text-primary-color) r g b / 8%);
-  }
+	&:hover:not(.active) {
+		background-color: rgb(from var(--text-primary-color) r g b / 8%);
+	}
 
-  &.active {
-    background-color: var(--btn-primary-bg-color);
-    color: var(--btn-primary-text-color);
-  }
+	&.active {
+		background-color: var(--btn-primary-bg-color);
+		color: var(--btn-primary-text-color);
+	}
 }

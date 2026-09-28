@@ -1,16 +1,16 @@
 import { inject } from '@angular/core';
+import { AuthService } from '@sl/web/data-access/auth';
 import { firstValueFrom, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AuthService } from '@sl/web/data-access/auth';
 
 export const authInitializer = async () => {
-  const authService = inject(AuthService);
+	const authService = inject(AuthService);
 
-  return firstValueFrom(
-    authService.restoreSession().pipe(
-      catchError(() => {
-        return of(null);
-      }),
-    ),
-  ).then();
+	return firstValueFrom(
+		authService.restoreSession().pipe(
+			catchError(() => {
+				return of(null);
+			})
+		)
+	).then();
 };

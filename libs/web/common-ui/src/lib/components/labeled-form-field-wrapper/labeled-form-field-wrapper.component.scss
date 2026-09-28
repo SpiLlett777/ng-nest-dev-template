@@ -2,14 +2,14 @@
 @use 'mixins' as *;
 
 .form-field-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: rem(9);
+	display: flex;
+	flex-direction: column;
+	gap: rem(9);
 }
 
 .label-text {
-  @include fluid-text(20, 14);
-  line-height: fluid(23, 16);
-  font-weight: 400;
-  color: var(--text-primary-color);
+	@include fluid-text(20, 14);
+	line-height: fluid(23, 16);
+	font-weight: 400;
+	color: var(--text-primary-color);
 }

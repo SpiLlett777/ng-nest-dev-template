@@ -1,26 +1,26 @@
 <sl-base-modal>
-  <div
-    class="layers__modal"
-    role="alertdialog"
-    aria-modal="true"
-    aria-labelledby="confirmation-title"
-    aria-describedby="confirmation-description"
-  >
-    <div class="layers__modal-title" id="confirmation-title">{{ title() }}</div>
-    <div class="layers__modal-text" id="confirmation-description">
-      {{ subtitle() }}
-    </div>
-    <div class="layers__modal-actions">
-      <button
-        type="button"
-        class="layers__modal-btn layers__modal-btn--danger"
-        (click)="confirm(true)"
-      >
-        {{ agreeBtnText() }}
-      </button>
-      <button type="button" class="layers__modal-btn" (click)="confirm(false)">
-        {{ rejectBtnText() }}
-      </button>
-    </div>
-  </div>
+	<div
+		class="layers__modal"
+		role="alertdialog"
+		aria-modal="true"
+		aria-labelledby="confirmation-title"
+		aria-describedby="confirmation-description"
+	>
+		<div class="layers__modal-title" id="confirmation-title">{{ title() }}</div>
+		<div class="layers__modal-text" id="confirmation-description">
+			{{ subtitle() }}
+		</div>
+		<div class="layers__modal-actions">
+			<button
+				type="button"
+				class="layers__modal-btn layers__modal-btn--danger"
+				(click)="confirm(true)"
+			>
+				{{ agreeBtnText() }}
+			</button>
+			<button type="button" class="layers__modal-btn" (click)="confirm(false)">
+				{{ rejectBtnText() }}
+			</button>
+		</div>
+	</div>
 </sl-base-modal>

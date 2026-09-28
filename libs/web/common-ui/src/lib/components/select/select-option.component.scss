@@ -1,19 +1,19 @@
 @use 'functions' as *;
 
 :host {
-  display: block;
-  padding: rem(10) rem(12);
-  border-radius: rem(8);
-  color: var(--text-primary-color);
-  cursor: pointer;
+	display: block;
+	padding: rem(10) rem(12);
+	border-radius: rem(8);
+	color: var(--text-primary-color);
+	cursor: pointer;
 }
 
 :host(:hover),
 :host(.sl-option--selected) {
-  background-color: rgb(from var(--bg-surface-variant-color) r g b / 70%);
-  color: var(--text-light-color);
+	background-color: rgb(from var(--bg-surface-variant-color) r g b / 70%);
+	color: var(--text-light-color);
 }
 
 :host(.sl-option--selected) {
-  font-weight: 700;
+	font-weight: 700;
 }

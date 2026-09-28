@@ -1,25 +1,25 @@
 <section class="comments__section">
-  <p class="comments-section__title">Комментарии:</p>
+	<p class="comments-section__title">Комментарии:</p>
 
-  <sl-comment-input
-    class="comments-section__input"
-    placeholder="Оставить комментарий..."
-    (submitted)="submit($event)"
-  ></sl-comment-input>
+	<sl-comment-input
+		class="comments-section__input"
+		placeholder="Оставить комментарий..."
+		(submitted)="submit($event)"
+	></sl-comment-input>
 
-  @if (replyTo()) {
-    <button class="cancel-reply" type="button" (click)="replyTo.set(null)">
-      Отменить ответ
-    </button>
-  }
+	@if (replyTo()) {
+		<button class="cancel-reply" type="button" (click)="replyTo.set(null)">
+			Отменить ответ
+		</button>
+	}
 
-  @if (comments()) {
-    @for (comment of comments(); track comment.id) {
-      <sl-comment
-        [comment]="comment"
-        [depth]="0"
-        (replyRequested)="replyTo.set($event)"
-      ></sl-comment>
-    }
-  }
+	@if (comments()) {
+		@for (comment of comments(); track comment.id) {
+			<sl-comment
+				[comment]="comment"
+				[depth]="0"
+				(replyRequested)="replyTo.set($event)"
+			></sl-comment>
+		}
+	}
 </section>

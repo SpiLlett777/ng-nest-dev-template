@@ -6,10 +6,10 @@ import { ModalClose } from './modal-close.interface';
 import { SliderItemInterface } from './slider-item.interface';
 
 export type {
-  ModalClose,
-  ConfirmModalInputs,
-  BaseObject,
-  SliderItemInterface,
-  CommentItem,
-  ApiConfig,
+	ModalClose,
+	ConfirmModalInputs,
+	BaseObject,
+	SliderItemInterface,
+	CommentItem,
+	ApiConfig,
 };

@@ -4,21 +4,21 @@ import { authRoutes } from './routing/auth.routes';
 import { publicRoutes } from './routing/public.routes';
 
 const notFoundRoutes: Routes = [
-  {
-    path: '**',
-    component: ErrorComponent,
-    data: {
-      seo: {
-        title: 'Страница не найдена',
-        description: 'Запрошенная страница не найдена.',
-        index: false,
-      },
-    },
-  },
+	{
+		path: '**',
+		component: ErrorComponent,
+		data: {
+			seo: {
+				title: 'Страница не найдена',
+				description: 'Запрошенная страница не найдена.',
+				index: false,
+			},
+		},
+	},
 ];
 
 export const routes: Routes = [
-  ...publicRoutes,
-  ...authRoutes,
-  ...notFoundRoutes,
+	...publicRoutes,
+	...authRoutes,
+	...notFoundRoutes,
 ];

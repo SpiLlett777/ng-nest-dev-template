@@ -1,7 +1,7 @@
 export interface SeedUserResult {
-  userId: number;
-  username: string;
-  nickname: string;
-  email: string;
-  roles: string[];
+	userId: number;
+	username: string;
+	nickname: string;
+	email: string;
+	roles: string[];
 }

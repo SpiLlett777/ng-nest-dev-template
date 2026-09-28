@@ -1,72 +1,72 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  forwardRef,
-  input,
-  signal,
+	ChangeDetectionStrategy,
+	Component,
+	effect,
+	forwardRef,
+	input,
+	signal,
 } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormControl,
-  NG_VALUE_ACCESSOR,
-  ReactiveFormsModule,
-} from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+	ControlValueAccessor,
+	FormControl,
+	NG_VALUE_ACCESSOR,
+	ReactiveFormsModule,
+} from '@angular/forms';
 
 @Component({
-  selector: 'sl-search-input',
-  imports: [ReactiveFormsModule],
-  templateUrl: './search-input.component.html',
-  styleUrl: './search-input.component.scss',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: forwardRef(() => SearchInputComponent),
-    },
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+	selector: 'sl-search-input',
+	imports: [ReactiveFormsModule],
+	templateUrl: './search-input.component.html',
+	styleUrl: './search-input.component.scss',
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			multi: true,
+			useExisting: forwardRef(() => SearchInputComponent),
+		},
+	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchInputComponent implements ControlValueAccessor {
-  type = input('text');
-  placeholder = input('Поиск');
+	type = input('text');
+	placeholder = input('Поиск');
 
-  disabled = signal(false);
+	disabled = signal(false);
 
-  innerFormControl = new FormControl('');
+	innerFormControl = new FormControl('');
 
-  constructor() {
-    effect(() => {
-      if (this.disabled()) {
-        this.innerFormControl.disable();
-        return;
-      }
-      this.innerFormControl.enable();
-    });
+	constructor() {
+		effect(() => {
+			if (this.disabled()) {
+				this.innerFormControl.disable();
+				return;
+			}
+			this.innerFormControl.enable();
+		});
 
-    this.innerFormControl.valueChanges
-      .pipe(takeUntilDestroyed())
-      .subscribe((value) => this.onChange(value));
-  }
+		this.innerFormControl.valueChanges
+			.pipe(takeUntilDestroyed())
+			.subscribe(value => this.onChange(value));
+	}
 
-  writeValue(value: string | null): void {
-    this.innerFormControl.setValue(value);
-  }
+	writeValue(value: string | null): void {
+		this.innerFormControl.setValue(value);
+	}
 
-  registerOnChange(fn: (value: string | null) => void): void {
-    this.onChange = fn;
-  }
+	registerOnChange(fn: (value: string | null) => void): void {
+		this.onChange = fn;
+	}
 
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
+	registerOnTouched(fn: () => void): void {
+		this.onTouched = fn;
+	}
 
-  setDisabledState?(isDisabled: boolean): void {
-    this.disabled.set(isDisabled);
-  }
+	setDisabledState?(isDisabled: boolean): void {
+		this.disabled.set(isDisabled);
+	}
 
-  onChange: (value: string | null) => void = () => undefined;
+	onChange: (value: string | null) => void = () => undefined;
 
-  onTouched: VoidFunction = () => undefined;
+	onTouched: VoidFunction = () => undefined;
 }

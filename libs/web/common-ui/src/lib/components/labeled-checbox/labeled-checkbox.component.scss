@@ -1,12 +1,12 @@
 @use 'functions' as *;
 
 .checkbox-wrapper {
-  display: flex;
-  gap: rem(11);
-  align-items: start;
-  font-family: 'Poppins', sans-serif;
-  font-size: rem(11);
-  line-height: rem(17);
-  width: fit-content;
-  cursor: pointer;
+	display: flex;
+	gap: rem(11);
+	align-items: start;
+	font-family: 'Poppins', sans-serif;
+	font-size: rem(11);
+	line-height: rem(17);
+	width: fit-content;
+	cursor: pointer;
 }

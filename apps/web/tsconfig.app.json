@@ -1,12 +1,12 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "outDir": "../../dist/out-tsc",
-    "emitDecoratorMetadata": false,
-    "types": [],
-    "module": "preserve",
-    "moduleResolution": "bundler"
-  },
-  "files": ["src/main.ts"],
-  "include": ["src/**/*.d.ts"]
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"outDir": "../../dist/out-tsc",
+		"emitDecoratorMetadata": false,
+		"types": [],
+		"module": "preserve",
+		"moduleResolution": "bundler"
+	},
+	"files": ["src/main.ts"],
+	"include": ["src/**/*.d.ts"]
 }

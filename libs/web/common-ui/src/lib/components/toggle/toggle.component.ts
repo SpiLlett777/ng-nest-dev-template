@@ -1,26 +1,26 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  output,
+	ChangeDetectionStrategy,
+	Component,
+	input,
+	output,
 } from '@angular/core';
 
 @Component({
-  selector: 'sl-toggle',
-  templateUrl: './toggle.component.html',
-  styleUrl: './toggle.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+	selector: 'sl-toggle',
+	templateUrl: './toggle.component.html',
+	styleUrl: './toggle.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToggleComponent {
-  checked = input(false);
-  disabled = input(false);
-  ariaLabel = input<string | null>(null);
+	checked = input(false);
+	disabled = input(false);
+	ariaLabel = input<string | null>(null);
 
-  checkedChange = output<boolean>();
+	checkedChange = output<boolean>();
 
-  updateChecked(event: Event) {
-    const checkbox = event.target;
-    if (!(checkbox instanceof HTMLInputElement)) return;
-    this.checkedChange.emit(checkbox.checked);
-  }
+	updateChecked(event: Event) {
+		const checkbox = event.target;
+		if (!(checkbox instanceof HTMLInputElement)) return;
+		this.checkedChange.emit(checkbox.checked);
+	}
 }
