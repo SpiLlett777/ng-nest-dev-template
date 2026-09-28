@@ -1,192 +1,192 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  DestroyRef,
-  inject,
-  signal,
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	DestroyRef,
+	inject,
+	signal,
 } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router,
-  RouterLink,
-  RouterOutlet,
+	ActivatedRoute,
+	NavigationEnd,
+	Router,
+	RouterLink,
+	RouterOutlet,
 } from '@angular/router';
+import { ProfileSummaryDto } from '@sl/shared/profiles';
 import {
-  ConfirmationModalComponent,
-  ErrorToastComponent,
-  ModalService,
-  PopoverComponent,
-  SuccessToastComponent,
-  SvgComponent,
-  TabItem,
-  TabsComponent,
-  ToastService,
+	ConfirmationModalComponent,
+	ErrorToastComponent,
+	ModalService,
+	PopoverComponent,
+	SuccessToastComponent,
+	SvgComponent,
+	TabItem,
+	TabsComponent,
+	ToastService,
 } from '@sl/web/common-ui';
 import {
-  CurrentAccountStore,
-  ProfileService,
+	CurrentAccountStore,
+	ProfileService,
 } from '@sl/web/data-access/profile';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { filter, finalize, firstValueFrom, map } from 'rxjs';
-import { ProfileSummaryDto } from '@sl/shared/profiles';
 
 const emptySummary: ProfileSummaryDto = {
-  bio: '',
-  username: '',
-  avatarUrl: null,
-  createdAt: '2026-07-24T20:55:32.105Z',
+	bio: '',
+	username: '',
+	avatarUrl: null,
+	createdAt: '2026-07-24T20:55:32.105Z',
 };
 
 @Component({
-  selector: 'sl-profile-page-layout',
-  imports: [
-    RouterOutlet,
-    RouterLink,
-    SvgComponent,
-    PopoverComponent,
-    TabsComponent,
-  ],
-  templateUrl: './profile-page-layout.component.html',
-  styleUrl: './profile-page-layout.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+	selector: 'sl-profile-page-layout',
+	imports: [
+		RouterOutlet,
+		RouterLink,
+		SvgComponent,
+		PopoverComponent,
+		TabsComponent,
+	],
+	templateUrl: './profile-page-layout.component.html',
+	styleUrl: './profile-page-layout.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfilePageLayoutComponent {
-  #route = inject(ActivatedRoute);
-  #router = inject(Router);
-  #profileService = inject(ProfileService);
-  #currentAccountStore = inject(CurrentAccountStore);
-  #destroyRef = inject(DestroyRef);
-  #modalService = inject(ModalService);
-  #toastService = inject(ToastService);
-  #publicSummary = signal<ProfileSummaryDto>(emptySummary);
+	#route = inject(ActivatedRoute);
+	#router = inject(Router);
+	#profileService = inject(ProfileService);
+	#currentAccountStore = inject(CurrentAccountStore);
+	#destroyRef = inject(DestroyRef);
+	#modalService = inject(ModalService);
+	#toastService = inject(ToastService);
+	#publicSummary = signal<ProfileSummaryDto>(emptySummary);
 
-  readonly isEditing = toSignal(
-    this.#router.events.pipe(
-      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
-      map((event) => event.urlAfterRedirects.endsWith('/edit')),
-    ),
-    { initialValue: this.#router.url.endsWith('/edit') },
-  );
-  readonly profileId = this.#route.parent?.snapshot.paramMap.get('id') ?? 'me';
-  readonly isOwnProfile = this.profileId === 'me';
+	readonly isEditing = toSignal(
+		this.#router.events.pipe(
+			filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+			map(event => event.urlAfterRedirects.endsWith('/edit'))
+		),
+		{ initialValue: this.#router.url.endsWith('/edit') }
+	);
+	readonly profileId = this.#route.parent?.snapshot.paramMap.get('id') ?? 'me';
+	readonly isOwnProfile = this.profileId === 'me';
 
-  // TODO: Табы зависят от активного рабочего контекста. Заполняется по мере готовности модулей
-  readonly profileTabs: readonly TabItem[] = [
-    { id: 'overview', label: 'Обзор', routerLink: ['overview'] },
-    { id: 'deals', label: 'Сделки', routerLink: ['deals'] },
-    ...(this.isOwnProfile
-      ? [{ id: 'documents', label: 'Документы', routerLink: ['documents'] }]
-      : []),
-  ];
+	// TODO: Табы зависят от активного рабочего контекста. Заполняется по мере готовности модулей
+	readonly profileTabs: readonly TabItem[] = [
+		{ id: 'overview', label: 'Обзор', routerLink: ['overview'] },
+		{ id: 'deals', label: 'Сделки', routerLink: ['deals'] },
+		...(this.isOwnProfile
+			? [{ id: 'documents', label: 'Документы', routerLink: ['documents'] }]
+			: []),
+	];
 
-  readonly summary = computed(() =>
-    this.isOwnProfile
-      ? (this.#currentAccountStore.profile() ?? emptySummary)
-      : this.#publicSummary(),
-  );
-  readonly isAvatarUpdating = signal(false);
-  readonly memberSince = computed(() => {
-    const createdAt = this.summary().createdAt;
-    if (!createdAt) return '';
+	readonly summary = computed(() =>
+		this.isOwnProfile
+			? (this.#currentAccountStore.profile() ?? emptySummary)
+			: this.#publicSummary()
+	);
+	readonly isAvatarUpdating = signal(false);
+	readonly memberSince = computed(() => {
+		const createdAt = this.summary().createdAt;
+		if (!createdAt) return '';
 
-    const date = new Date(createdAt);
-    const months = [
-      'января',
-      'февраля',
-      'марта',
-      'апреля',
-      'мая',
-      'июня',
-      'июля',
-      'августа',
-      'сентября',
-      'октября',
-      'ноября',
-      'декабря',
-    ];
-    return `${months[date.getMonth()]} ${date.getFullYear()}`;
-  });
+		const date = new Date(createdAt);
+		const months = [
+			'января',
+			'февраля',
+			'марта',
+			'апреля',
+			'мая',
+			'июня',
+			'июля',
+			'августа',
+			'сентября',
+			'октября',
+			'ноября',
+			'декабря',
+		];
+		return `${months[date.getMonth()]} ${date.getFullYear()}`;
+	});
 
-  constructor() {
-    if (this.isOwnProfile) {
-      if (!this.#currentAccountStore.profile()) {
-        this.#currentAccountStore.reloadProfile();
-      }
-      return;
-    }
+	constructor() {
+		if (this.isOwnProfile) {
+			if (!this.#currentAccountStore.profile()) {
+				this.#currentAccountStore.reloadProfile();
+			}
+			return;
+		}
 
-    this.#profileService
-      .getProfileSummary(Number(this.profileId))
-      .pipe(takeUntilDestroyed(this.#destroyRef))
-      .subscribe({ next: (summary) => this.#publicSummary.set(summary) });
-  }
+		this.#profileService
+			.getProfileSummary(Number(this.profileId))
+			.pipe(takeUntilDestroyed(this.#destroyRef))
+			.subscribe({ next: summary => this.#publicSummary.set(summary) });
+	}
 
-  selectAvatar(event: Event) {
-    const input = event.target;
-    if (!(input instanceof HTMLInputElement)) return;
-    const file = input.files?.[0];
-    input.value = '';
-    if (!file || this.isAvatarUpdating()) return;
+	selectAvatar(event: Event) {
+		const input = event.target;
+		if (!(input instanceof HTMLInputElement)) return;
+		const file = input.files?.[0];
+		input.value = '';
+		if (!file || this.isAvatarUpdating()) return;
 
-    const allowedTypes = ['image/png', 'image/jpeg', 'image/webp'];
-    if (!allowedTypes.includes(file.type) || file.size > 5_000_000) {
-      this.#showAvatarError(
-        'Выберите PNG, JPEG или WebP размером не более 5 МБ.',
-      );
-      return;
-    }
+		const allowedTypes = ['image/png', 'image/jpeg', 'image/webp'];
+		if (!allowedTypes.includes(file.type) || file.size > 5_000_000) {
+			this.#showAvatarError(
+				'Выберите PNG, JPEG или WebP размером не более 5 МБ.'
+			);
+			return;
+		}
 
-    this.isAvatarUpdating.set(true);
-    this.#profileService
-      .uploadAvatar(file)
-      .pipe(
-        finalize(() => this.isAvatarUpdating.set(false)),
-        takeUntilDestroyed(this.#destroyRef),
-      )
-      .subscribe({
-        next: ({ avatarUrl }) => {
-          this.#currentAccountStore.updateProfile({ avatarUrl });
-          this.#toastService.show(SuccessToastComponent, {
-            message: 'Аватар обновлён',
-          });
-        },
-        error: () => this.#showAvatarError('Не удалось загрузить аватар.'),
-      });
-  }
+		this.isAvatarUpdating.set(true);
+		this.#profileService
+			.uploadAvatar(file)
+			.pipe(
+				finalize(() => this.isAvatarUpdating.set(false)),
+				takeUntilDestroyed(this.#destroyRef)
+			)
+			.subscribe({
+				next: ({ avatarUrl }) => {
+					this.#currentAccountStore.updateProfile({ avatarUrl });
+					this.#toastService.show(SuccessToastComponent, {
+						message: 'Аватар обновлён',
+					});
+				},
+				error: () => this.#showAvatarError('Не удалось загрузить аватар.'),
+			});
+	}
 
-  async removeAvatar() {
-    if (!this.summary().avatarUrl || this.isAvatarUpdating()) return;
-    const confirmed = await firstValueFrom(
-      this.#modalService.show<boolean>(ConfirmationModalComponent, {
-        title: 'Удалить аватар?',
-        subtitle: 'В профиле снова будет отображаться стандартное изображение.',
-        agreeBtnText: 'Удалить аватар',
-        rejectBtnText: 'Отмена',
-      }),
-    );
-    if (!confirmed) return;
+	async removeAvatar() {
+		if (!this.summary().avatarUrl || this.isAvatarUpdating()) return;
+		const confirmed = await firstValueFrom(
+			this.#modalService.show<boolean>(ConfirmationModalComponent, {
+				title: 'Удалить аватар?',
+				subtitle: 'В профиле снова будет отображаться стандартное изображение.',
+				agreeBtnText: 'Удалить аватар',
+				rejectBtnText: 'Отмена',
+			})
+		);
+		if (!confirmed) return;
 
-    this.isAvatarUpdating.set(true);
-    this.#profileService
-      .removeAvatar()
-      .pipe(
-        finalize(() => this.isAvatarUpdating.set(false)),
-        takeUntilDestroyed(this.#destroyRef),
-      )
-      .subscribe({
-        next: () => {
-          this.#currentAccountStore.updateProfile({ avatarUrl: null });
-          this.#toastService.show(SuccessToastComponent, {
-            message: 'Аватар удалён',
-          });
-        },
-        error: () => this.#showAvatarError('Не удалось удалить аватар.'),
-      });
-  }
+		this.isAvatarUpdating.set(true);
+		this.#profileService
+			.removeAvatar()
+			.pipe(
+				finalize(() => this.isAvatarUpdating.set(false)),
+				takeUntilDestroyed(this.#destroyRef)
+			)
+			.subscribe({
+				next: () => {
+					this.#currentAccountStore.updateProfile({ avatarUrl: null });
+					this.#toastService.show(SuccessToastComponent, {
+						message: 'Аватар удалён',
+					});
+				},
+				error: () => this.#showAvatarError('Не удалось удалить аватар.'),
+			});
+	}
 
-  #showAvatarError(message: string) {
-    this.#toastService.show(ErrorToastComponent, { message });
-  }
+	#showAvatarError(message: string) {
+		this.#toastService.show(ErrorToastComponent, { message });
+	}
 }

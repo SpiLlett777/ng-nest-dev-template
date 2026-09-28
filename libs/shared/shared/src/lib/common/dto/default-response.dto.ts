@@ -1,4 +1,4 @@
 export interface DefaultResponseDto {
-  error: boolean;
-  message: string;
+	error: boolean;
+	message: string;
 }

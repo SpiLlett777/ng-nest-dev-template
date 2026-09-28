@@ -1,42 +1,42 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "outDir": "./dist/out-tsc",
-    "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "moduleResolution": "bundler",
-    "importHelpers": true,
-    "target": "ES2022",
-    "module": "ES2022",
-    "paths": {
-      "@sl/api/auth": ["./libs/api/auth/src/index.ts"],
-      "@sl/api/database-main": ["./libs/api/database-main/src/index.ts"],
-      "@sl/api/shared": ["./libs/api/shared/src/index.ts"],
-      "@sl/api/users": ["./libs/api/users/src/index.ts"],
-      "@sl/shared/*": ["./libs/shared/shared/src/lib/*"],
-      "@sl/web/auth": ["./libs/web/auth/src/index.ts"],
-      "@sl/web/common-ui": ["./libs/web/common-ui/src/index.ts"],
-      "@sl/web/data-access/*": ["./libs/web/data-access/src/lib/*"],
-      "@sl/web/home": ["./libs/web/home/src/index.ts"],
-      "@sl/web/layout/*": ["./libs/web/layout/src/lib/*"],
-      "@sl/web/profile": ["./libs/web/profile/src/index.ts"],
-      "@sl/web/shared": ["./libs/web/shared/src/index.ts"],
-    },
-    "rootDir": "."
-  },
-  "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true
-  },
-  "exclude": ["node_modules", "tmp"]
+	"compileOnSave": false,
+	"compilerOptions": {
+		"outDir": "./dist/out-tsc",
+		"strict": true,
+		"noImplicitOverride": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"skipLibCheck": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"moduleResolution": "bundler",
+		"importHelpers": true,
+		"target": "ES2022",
+		"module": "ES2022",
+		"paths": {
+			"@sl/api/auth": ["./libs/api/auth/src/index.ts"],
+			"@sl/api/database-main": ["./libs/api/database-main/src/index.ts"],
+			"@sl/api/shared": ["./libs/api/shared/src/index.ts"],
+			"@sl/api/users": ["./libs/api/users/src/index.ts"],
+			"@sl/shared/*": ["./libs/shared/shared/src/lib/*"],
+			"@sl/web/auth": ["./libs/web/auth/src/index.ts"],
+			"@sl/web/common-ui": ["./libs/web/common-ui/src/index.ts"],
+			"@sl/web/data-access/*": ["./libs/web/data-access/src/lib/*"],
+			"@sl/web/home": ["./libs/web/home/src/index.ts"],
+			"@sl/web/layout/*": ["./libs/web/layout/src/lib/*"],
+			"@sl/web/profile": ["./libs/web/profile/src/index.ts"],
+			"@sl/web/shared": ["./libs/web/shared/src/index.ts"]
+		},
+		"rootDir": "."
+	},
+	"angularCompilerOptions": {
+		"enableI18nLegacyMessageIdFormat": false,
+		"strictInjectionParameters": true,
+		"strictInputAccessModifiers": true,
+		"strictTemplates": true
+	},
+	"exclude": ["node_modules", "tmp"]
 }

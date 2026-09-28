@@ -1,18 +1,18 @@
 @use 'functions' as *;
 
 .toast__close {
-  font-size: rem(18);
-  padding: rem(2) rem(8);
-  color: var(--light-color);
+	font-size: rem(18);
+	padding: rem(2) rem(8);
+	color: var(--light-color);
 }
 
 .toast-content {
-  padding: rem(12) rem(16);
-  background-color: var(--green-color);
-  color: var(--light-color);
-  border-radius: rem(8);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: rem(8);
+	padding: rem(12) rem(16);
+	background-color: var(--green-color);
+	color: var(--light-color);
+	border-radius: rem(8);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: rem(8);
 }

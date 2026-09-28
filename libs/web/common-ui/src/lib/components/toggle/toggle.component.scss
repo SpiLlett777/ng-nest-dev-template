@@ -1,64 +1,64 @@
 @use 'functions' as *;
 
 :host {
-  display: inline-flex;
+	display: inline-flex;
 }
 
 .toggle {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: rem(9);
-  cursor: pointer;
-  user-select: none;
-  color: var(--text-primary-color);
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	gap: rem(9);
+	cursor: pointer;
+	user-select: none;
+	color: var(--text-primary-color);
 
-  input {
-    position: absolute;
-    width: rem(1);
-    height: rem(1);
-    overflow: hidden;
-    opacity: 0;
+	input {
+		position: absolute;
+		width: rem(1);
+		height: rem(1);
+		overflow: hidden;
+		opacity: 0;
 
-    &:checked + .toggle__track {
-      background-color: var(--text-primary-color);
+		&:checked + .toggle__track {
+			background-color: var(--text-primary-color);
 
-      &::after {
-        transform: translateX(rem(16));
-        background-color: var(--bg-main-color);
-      }
-    }
-  }
+			&::after {
+				transform: translateX(rem(16));
+				background-color: var(--bg-main-color);
+			}
+		}
+	}
 }
 
 .toggle--disabled {
-  cursor: default;
-  opacity: 0.55;
+	cursor: default;
+	opacity: 0.55;
 }
 
 .toggle__label:empty {
-  display: none;
+	display: none;
 }
 
 .toggle__track {
-  position: relative;
-  width: rem(38);
-  height: rem(22);
-  flex: 0 0 auto;
-  border-radius: rem(11);
-  background-color: var(--btn-secondary-bg-color);
-  transition: background-color 150ms ease;
+	position: relative;
+	width: rem(38);
+	height: rem(22);
+	flex: 0 0 auto;
+	border-radius: rem(11);
+	background-color: var(--btn-secondary-bg-color);
+	transition: background-color 150ms ease;
 
-  &::after {
-    position: absolute;
-    top: rem(3);
-    left: rem(3);
-    width: rem(16);
-    height: rem(16);
-    border-radius: 50%;
-    background-color: var(--bg-surface-light-color);
-    box-shadow: 0 rem(1) rem(3) rgb(from var(--shadow-color) r g b / 28%);
-    content: '';
-    transition: transform 150ms ease;
-  }
+	&::after {
+		position: absolute;
+		top: rem(3);
+		left: rem(3);
+		width: rem(16);
+		height: rem(16);
+		border-radius: 50%;
+		background-color: var(--bg-surface-light-color);
+		box-shadow: 0 rem(1) rem(3) rgb(from var(--shadow-color) r g b / 28%);
+		content: '';
+		transition: transform 150ms ease;
+	}
 }

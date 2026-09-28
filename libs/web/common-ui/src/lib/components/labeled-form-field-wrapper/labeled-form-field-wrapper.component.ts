@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
-  selector: 'sl-labeled-form-field-wrapper',
-  imports: [],
-  templateUrl: './labeled-form-field-wrapper.component.html',
-  styleUrl: './labeled-form-field-wrapper.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+	selector: 'sl-labeled-form-field-wrapper',
+	imports: [],
+	templateUrl: './labeled-form-field-wrapper.component.html',
+	styleUrl: './labeled-form-field-wrapper.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LabeledFormFieldWrapperComponent {
-  label = input.required<string>();
+	label = input.required<string>();
 }

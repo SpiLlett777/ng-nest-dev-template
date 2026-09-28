@@ -3,7 +3,7 @@ import { HttpAdapterHost } from '@nestjs/core';
 import { ApiLogger, GlobalExceptionFilter } from '@sl/api/shared';
 
 export function setupFilters(app: INestApplication) {
-  const httpAdapterHost = app.get(HttpAdapterHost);
-  const logger = app.get(ApiLogger);
-  app.useGlobalFilters(new GlobalExceptionFilter(httpAdapterHost, logger));
+	const httpAdapterHost = app.get(HttpAdapterHost);
+	const logger = app.get(ApiLogger);
+	app.useGlobalFilters(new GlobalExceptionFilter(httpAdapterHost, logger));
 }

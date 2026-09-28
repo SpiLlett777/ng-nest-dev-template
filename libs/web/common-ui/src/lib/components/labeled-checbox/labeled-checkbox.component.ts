@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
-  selector: 'sl-labeled-checkbox',
-  imports: [],
-  templateUrl: './labeled-checkbox.component.html',
-  styleUrl: './labeled-checkbox.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+	selector: 'sl-labeled-checkbox',
+	imports: [],
+	templateUrl: './labeled-checkbox.component.html',
+	styleUrl: './labeled-checkbox.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LabeledCheckboxComponent {
-  label = input.required<string>();
+	label = input.required<string>();
 }

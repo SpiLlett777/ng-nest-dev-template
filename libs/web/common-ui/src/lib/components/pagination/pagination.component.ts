@@ -1,33 +1,33 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	inject,
 } from '@angular/core';
 import { SvgComponent } from '../svg/svg.component';
 import { PaginationService } from './pagination.service';
 
 @Component({
-  selector: 'sl-pagination',
-  imports: [SvgComponent],
-  templateUrl: './pagination.component.html',
-  styleUrl: './pagination.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    '[style.display]': 'isVisible() ? null : "none"',
-  },
+	selector: 'sl-pagination',
+	imports: [SvgComponent],
+	templateUrl: './pagination.component.html',
+	styleUrl: './pagination.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		'[style.display]': 'isVisible() ? null : "none"',
+	},
 })
 export class PaginationComponent {
-  #paginationService = inject(PaginationService);
+	#paginationService = inject(PaginationService);
 
-  currentPage = this.#paginationService.currentPage;
-  maxPage = this.#paginationService.maxPage;
-  visiblePages = this.#paginationService.visiblePages;
-  isVisible = computed(() => (this.maxPage() ?? 0) > 1);
+	currentPage = this.#paginationService.currentPage;
+	maxPage = this.#paginationService.maxPage;
+	visiblePages = this.#paginationService.visiblePages;
+	isVisible = computed(() => (this.maxPage() ?? 0) > 1);
 
-  changePage(page: number | '...') {
-    if (page === '...') return;
+	changePage(page: number | '...') {
+		if (page === '...') return;
 
-    this.#paginationService.changePage(page);
-  }
+		this.#paginationService.changePage(page);
+	}
 }

@@ -1,108 +1,108 @@
 <div class="container profile-container">
-  <div class="profile-header-wrapper">
-    <div class="profile-header">
-      <div class="profile__user">
-        @if (isOwnProfile && isEditing()) {
-          <sl-popover
-            #avatarMenu
-            alignment="start"
-            ariaLabel="Действия с аватаром"
-          >
-            <button
-              slPopoverTrigger
-              class="profile__avatar-button"
-              type="button"
-              aria-haspopup="menu"
-              [attr.aria-expanded]="avatarMenu.isOpen()"
-              [disabled]="isAvatarUpdating()"
-            >
-              @if (summary().avatarUrl) {
-                <img
-                  class="profile__avatar"
-                  [src]="summary().avatarUrl"
-                  alt="Текущий аватар"
-                />
-              } @else {
-                <svg icon="avatar-light" class="svg120"></svg>
-              }
-              <span class="profile__avatar-edit">
-                {{ isAvatarUpdating() ? 'Обновляем…' : 'Изменить' }}
-              </span>
-            </button>
+	<div class="profile-header-wrapper">
+		<div class="profile-header">
+			<div class="profile__user">
+				@if (isOwnProfile && isEditing()) {
+					<sl-popover
+						#avatarMenu
+						alignment="start"
+						ariaLabel="Действия с аватаром"
+					>
+						<button
+							slPopoverTrigger
+							class="profile__avatar-button"
+							type="button"
+							aria-haspopup="menu"
+							[attr.aria-expanded]="avatarMenu.isOpen()"
+							[disabled]="isAvatarUpdating()"
+						>
+							@if (summary().avatarUrl) {
+								<img
+									class="profile__avatar"
+									[src]="summary().avatarUrl"
+									alt="Текущий аватар"
+								/>
+							} @else {
+								<svg icon="avatar-light" class="svg120"></svg>
+							}
+							<span class="profile__avatar-edit">
+								{{ isAvatarUpdating() ? 'Обновляем…' : 'Изменить' }}
+							</span>
+						</button>
 
-            <div slPopoverContent class="profile__avatar-menu">
-              <button
-                type="button"
-                role="menuitem"
-                (click)="avatarInput.click()"
-              >
-                Загрузить изображение
-              </button>
-              <button
-                type="button"
-                role="menuitem"
-                [disabled]="!summary().avatarUrl"
-                (click)="removeAvatar()"
-              >
-                Удалить изображение
-              </button>
-            </div>
-          </sl-popover>
-          <input
-            #avatarInput
-            class="profile__avatar-input"
-            type="file"
-            accept="image/png,image/jpeg,image/webp"
-            (change)="selectAvatar($event)"
-          />
-        } @else if (summary().avatarUrl) {
-          <img class="profile__avatar" [src]="summary().avatarUrl" alt="" />
-        } @else {
-          <svg icon="avatar-light" class="svg120"></svg>
-        }
+						<div slPopoverContent class="profile__avatar-menu">
+							<button
+								type="button"
+								role="menuitem"
+								(click)="avatarInput.click()"
+							>
+								Загрузить изображение
+							</button>
+							<button
+								type="button"
+								role="menuitem"
+								[disabled]="!summary().avatarUrl"
+								(click)="removeAvatar()"
+							>
+								Удалить изображение
+							</button>
+						</div>
+					</sl-popover>
+					<input
+						#avatarInput
+						class="profile__avatar-input"
+						type="file"
+						accept="image/png,image/jpeg,image/webp"
+						(change)="selectAvatar($event)"
+					/>
+				} @else if (summary().avatarUrl) {
+					<img class="profile__avatar" [src]="summary().avatarUrl" alt="" />
+				} @else {
+					<svg icon="avatar-light" class="svg120"></svg>
+				}
 
-        <div class="profile__user-info">
-          <div class="profile__username-row">
-            <p class="profile__username">{{ summary().username }}</p>
-            @if (isOwnProfile && !isEditing()) {
-              <a
-                class="profile__edit-link"
-                [routerLink]="['edit']"
-                aria-label="Редактировать профиль"
-              >
-                <span aria-hidden="true">✎</span>
-                Редактировать
-              </a>
-            }
-          </div>
+				<div class="profile__user-info">
+					<div class="profile__username-row">
+						<p class="profile__username">{{ summary().username }}</p>
+						@if (isOwnProfile && !isEditing()) {
+							<a
+								class="profile__edit-link"
+								[routerLink]="['edit']"
+								aria-label="Редактировать профиль"
+							>
+								<span aria-hidden="true">✎</span>
+								Редактировать
+							</a>
+						}
+					</div>
 
-          @if (summary().bio) {
-            <p class="profile__bio">{{ summary().bio }}</p>
-          } @else if (isOwnProfile) {
-            <a class="profile__bio-empty" [routerLink]="['edit']">
-              Расскажите о себе
-            </a>
-          }
+					@if (summary().bio) {
+						<p class="profile__bio">{{ summary().bio }}</p>
+					} @else if (isOwnProfile) {
+						<a class="profile__bio-empty" [routerLink]="['edit']">
+							Расскажите о себе
+						</a>
+					}
 
-          @if (memberSince()) {
-            <p class="profile__member-since">На сайте с {{ memberSince() }}</p>
-          }
-        </div>
-      </div>
-    </div>
-  </div>
+					@if (memberSince()) {
+						<p class="profile__member-since">На сайте с {{ memberSince() }}</p>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
 
-  @if (!isEditing()) {
-    <sl-tabs
-      class="profile__nav"
-      [tabs]="profileTabs"
-      ariaLabel="Разделы профиля"
-    />
-  }
+	@if (!isEditing()) {
+		<sl-tabs
+			class="profile__nav"
+			[tabs]="profileTabs"
+			ariaLabel="Разделы профиля"
+		/>
+	}
 
-  <div class="profile-body">
-    <div class="page-content">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
+	<div class="profile-body">
+		<div class="page-content">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
 </div>

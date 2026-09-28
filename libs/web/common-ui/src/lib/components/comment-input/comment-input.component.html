@@ -1,17 +1,17 @@
 <div class="comment-input">
-  <div class="comment-input__wrapper">
-    <svg icon="avatar-light" class="svg34"></svg>
-    <textarea
-      [formControl]="commentControl"
-      (input)="onTextareaInput($event)"
-      (keydown.control.enter)="submit()"
-      rows="1"
-      class="comment-input__field"
-      type="text"
-      [placeholder]="placeholder()"
-    ></textarea>
-    <button class="comment-input__submit" type="button" (click)="submit()">
-      Отправить
-    </button>
-  </div>
+	<div class="comment-input__wrapper">
+		<svg icon="avatar-light" class="svg34"></svg>
+		<textarea
+			[formControl]="commentControl"
+			(input)="onTextareaInput($event)"
+			(keydown.control.enter)="submit()"
+			rows="1"
+			class="comment-input__field"
+			type="text"
+			[placeholder]="placeholder()"
+		></textarea>
+		<button class="comment-input__submit" type="button" (click)="submit()">
+			Отправить
+		</button>
+	</div>
 </div>

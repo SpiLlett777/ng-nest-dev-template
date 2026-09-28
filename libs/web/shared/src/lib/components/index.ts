@@ -3,7 +3,7 @@ import { NavigationHistoryService } from './navigation-manager/navigation-histor
 import { NavigationManagerComponent } from './navigation-manager/navigation-manager.component';
 
 export {
-  NavigationHistoryService,
-  NavigationManagerComponent,
-  CommentsSectionComponent,
+	NavigationHistoryService,
+	NavigationManagerComponent,
+	CommentsSectionComponent,
 };

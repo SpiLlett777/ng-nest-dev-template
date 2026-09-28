@@ -1,3 +1,26 @@
 {
-  "singleQuote": true
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "useTabs": true,
+  "semi": true,
+  "arrowParens": "avoid",
+  "plugins": ["@ianvs/prettier-plugin-sort-imports"],
+  "bracketSameLine": false,
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderCaseInsensitive": true,
+  "importOrderParserPlugins": [
+    "typescript",
+    "decorators-legacy",
+    "classProperties"
+  ],
+  "importOrder": [
+    "^@angular/(.*)$",
+    "^@nestjs/(.*)$",
+    "<THIRD_PARTY_MODULES>",
+    "^@/(.*)$",
+    "^../(.*)$",
+    "^./(.*)$"
+  ]
 }

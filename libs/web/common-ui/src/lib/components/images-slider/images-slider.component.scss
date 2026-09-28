@@ -3,48 +3,48 @@
 @use 'mixins' as *;
 
 :host {
-  display: block;
-  margin: 0 rem(40);
-  position: relative;
-  //height: fluid(150, 90);
+	display: block;
+	margin: 0 rem(40);
+	position: relative;
+	//height: fluid(150, 90);
 
-  &.small-slider {
-    height: fluid(111, 65);
-  }
+	&.small-slider {
+		height: fluid(111, 65);
+	}
 }
 
 .carousel-arrows {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
 
-  .arrow-prev {
-    position: relative;
-    left: rem(-32);
-    transform: rotateZ(180deg);
-  }
+	.arrow-prev {
+		position: relative;
+		left: rem(-32);
+		transform: rotateZ(180deg);
+	}
 
-  .arrow-next {
-    position: relative;
-    right: rem(-32);
-  }
+	.arrow-next {
+		position: relative;
+		right: rem(-32);
+	}
 }
 
 .button-arrow {
-  padding: rem(10);
-  margin: rem(-10);
-  border: none;
-  background: none;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  font-size: 0;
-  color: var(--btn-secondary-text-color);
+	padding: rem(10);
+	margin: rem(-10);
+	border: none;
+	background: none;
+	cursor: pointer;
+	transition: transform 0.3s ease;
+	font-size: 0;
+	color: var(--btn-secondary-text-color);
 
-  &.active {
-    transform: rotateZ(90deg);
-  }
+	&.active {
+		transform: rotateZ(90deg);
+	}
 }

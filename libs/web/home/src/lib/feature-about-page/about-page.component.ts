@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'sl-about-page',
-  imports: [RouterLink],
-  templateUrl: './about-page.component.html',
-  styleUrl: './about-page.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+	selector: 'sl-about-page',
+	imports: [RouterLink],
+	templateUrl: './about-page.component.html',
+	styleUrl: './about-page.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutPageComponent {}

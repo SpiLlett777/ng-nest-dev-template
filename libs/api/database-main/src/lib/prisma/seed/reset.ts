@@ -1,7 +1,7 @@
 import { SeedPrismaClient } from './client';
 
 export const resetDatabase = (prisma: SeedPrismaClient) =>
-  prisma.$executeRawUnsafe(`
+	prisma.$executeRawUnsafe(`
     TRUNCATE TABLE
       "sessions",
       "users"

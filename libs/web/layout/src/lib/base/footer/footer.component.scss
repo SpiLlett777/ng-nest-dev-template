@@ -3,92 +3,92 @@
 @use 'media' as *;
 
 :host {
-  display: block;
-  background-color: var(--bg-surface-main-color);
-  padding: fluid(32, 19) fluid(277, 80) fluid(36, 32) fluid(107, 97);
-  color: var(--text-light-color);
+	display: block;
+	background-color: var(--bg-surface-main-color);
+	padding: fluid(32, 19) fluid(277, 80) fluid(36, 32) fluid(107, 97);
+	color: var(--text-light-color);
 }
 
 .footer-content {
-  @include mobile-above {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+	@include mobile-above {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 
-  @include mobile {
-    @include flex-center();
-    flex-direction: column;
-    gap: rem(6);
-  }
+	@include mobile {
+		@include flex-center();
+		flex-direction: column;
+		gap: rem(6);
+	}
 }
 
 .company-info {
-  display: grid;
-  grid-template-columns: rem(44) 1fr;
-  column-gap: rem(16);
-  row-gap: rem(19);
-  align-items: center;
+	display: grid;
+	grid-template-columns: rem(44) 1fr;
+	column-gap: rem(16);
+	row-gap: rem(19);
+	align-items: center;
 
-  .company-name {
-    font-family: 'Platypi', sans-serif;
-    font-weight: 400;
-    @include fluid-text(20, 16);
-    line-height: rem(28);
-    white-space: nowrap;
-  }
+	.company-name {
+		font-family: 'Platypi', sans-serif;
+		font-weight: 400;
+		@include fluid-text(20, 16);
+		line-height: rem(28);
+		white-space: nowrap;
+	}
 
-  .company-logo {
-    @include square(fluid(45, 40));
-  }
+	.company-logo {
+		@include square(fluid(45, 40));
+	}
 
-  .policy-info {
-    grid-column: 2 / 3;
-    display: flex;
-    flex-direction: column;
-    gap: rem(4);
+	.policy-info {
+		grid-column: 2 / 3;
+		display: flex;
+		flex-direction: column;
+		gap: rem(4);
 
-    @include mobile {
-      grid-column: 1 / 3;
-      @include flex-center();
-      flex-direction: column;
-    }
-  }
+		@include mobile {
+			grid-column: 1 / 3;
+			@include flex-center();
+			flex-direction: column;
+		}
+	}
 
-  .policy-link {
-    text-decoration: underline;
-    color: var(--text-light-color);
-    @include fluid-text(14, 11);
-    line-height: rem(16);
-  }
+	.policy-link {
+		text-decoration: underline;
+		color: var(--text-light-color);
+		@include fluid-text(14, 11);
+		line-height: rem(16);
+	}
 }
 
 .contacts {
-  display: flex;
-  flex-direction: column;
-  gap: fluid(36, 25);
+	display: flex;
+	flex-direction: column;
+	gap: fluid(36, 25);
 
-  @include mobile {
-    @include flex-center();
-    flex-direction: column;
-  }
+	@include mobile {
+		@include flex-center();
+		flex-direction: column;
+	}
 
-  .email-info {
-    display: flex;
-    align-items: center;
-    gap: rem(6);
-  }
+	.email-info {
+		display: flex;
+		align-items: center;
+		gap: rem(6);
+	}
 
-  .email {
-    @include fluid-text(18, 11);
-    line-height: rem(21);
-    margin-bottom: rem(2);
-    white-space: nowrap;
-  }
+	.email {
+		@include fluid-text(18, 11);
+		line-height: rem(21);
+		margin-bottom: rem(2);
+		white-space: nowrap;
+	}
 
-  .social-links {
-    display: flex;
-    align-items: center;
-    gap: rem(18);
-  }
+	.social-links {
+		display: flex;
+		align-items: center;
+		gap: rem(18);
+	}
 }

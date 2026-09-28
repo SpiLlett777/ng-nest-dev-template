@@ -1,54 +1,54 @@
 import { effect, Injectable, signal } from '@angular/core';
 
 export interface Theme {
-  id: string;
-  title: string;
+	id: string;
+	title: string;
 }
 
 @Injectable({
-  providedIn: 'root',
+	providedIn: 'root',
 })
 export class ThemeService {
-  readonly themes: Theme[] = [
-    { id: 'light', title: 'Светлая' },
-    { id: 'dark', title: 'Темная' },
-    { id: 'steampunk', title: 'Стимпанк' },
-    { id: 'neon-sunset', title: 'Неоновый вечер' },
-  ];
+	readonly themes: Theme[] = [
+		{ id: 'light', title: 'Светлая' },
+		{ id: 'dark', title: 'Темная' },
+		{ id: 'steampunk', title: 'Стимпанк' },
+		{ id: 'neon-sunset', title: 'Неоновый вечер' },
+	];
 
-  readonly currentTheme = signal<string>('light');
+	readonly currentTheme = signal<string>('light');
 
-  private STORAGE_THEME = 'theme';
+	private STORAGE_THEME = 'theme';
 
-  constructor() {
-    this.initializeTheme();
+	constructor() {
+		this.initializeTheme();
 
-    effect(() => {
-      const themeId = this.currentTheme();
+		effect(() => {
+			const themeId = this.currentTheme();
 
-      localStorage.setItem(this.STORAGE_THEME, themeId);
+			localStorage.setItem(this.STORAGE_THEME, themeId);
 
-      document.documentElement.setAttribute('data-theme', themeId);
-    });
-  }
+			document.documentElement.setAttribute('data-theme', themeId);
+		});
+	}
 
-  setTheme(theme: string) {
-    if (this.themes.some((t) => t.id === theme)) this.currentTheme.set(theme);
-  }
+	setTheme(theme: string) {
+		if (this.themes.some(t => t.id === theme)) this.currentTheme.set(theme);
+	}
 
-  private initializeTheme() {
-    const savedTheme = localStorage.getItem(this.STORAGE_THEME);
+	private initializeTheme() {
+		const savedTheme = localStorage.getItem(this.STORAGE_THEME);
 
-    if (savedTheme && this.themes.some((theme) => theme.id === savedTheme)) {
-      this.setTheme(savedTheme);
-      return;
-    }
+		if (savedTheme && this.themes.some(theme => theme.id === savedTheme)) {
+			this.setTheme(savedTheme);
+			return;
+		}
 
-    const isSystemDark = window.matchMedia(
-      '(prefers-color-scheme: dark)',
-    ).matches;
+		const isSystemDark = window.matchMedia(
+			'(prefers-color-scheme: dark)'
+		).matches;
 
-    if (isSystemDark) this.setTheme('dark');
-    else this.setTheme('light');
-  }
+		if (isSystemDark) this.setTheme('dark');
+		else this.setTheme('light');
+	}
 }

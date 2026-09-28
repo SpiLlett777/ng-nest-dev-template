@@ -1,26 +1,26 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  ViewChild,
-  ViewContainerRef,
+	ChangeDetectionStrategy,
+	Component,
+	inject,
+	ViewChild,
+	ViewContainerRef,
 } from '@angular/core';
 import { ModalService } from '../base-modal/modal.service';
 
 @Component({
-  selector: 'sl-modal-host',
-  imports: [],
-  templateUrl: './modal-host.component.html',
-  styleUrl: './modal-host.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+	selector: 'sl-modal-host',
+	imports: [],
+	templateUrl: './modal-host.component.html',
+	styleUrl: './modal-host.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalHostComponent {
-  #modalService = inject(ModalService);
+	#modalService = inject(ModalService);
 
-  @ViewChild('modalHost', { read: ViewContainerRef })
-  set modalHost(modalHost: ViewContainerRef) {
-    if (!modalHost) return;
+	@ViewChild('modalHost', { read: ViewContainerRef })
+	set modalHost(modalHost: ViewContainerRef) {
+		if (!modalHost) return;
 
-    this.#modalService.registerContainer(modalHost);
-  }
+		this.#modalService.registerContainer(modalHost);
+	}
 }

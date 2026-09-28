@@ -1,35 +1,35 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
-import { catchError, throwError } from 'rxjs';
 import { inject } from '@angular/core';
 import { ErrorToastComponent, ToastService } from '@sl/web/common-ui';
 import { BYPASS_GLOBAL_ERROR } from '@sl/web/data-access/shared';
+import { catchError, throwError } from 'rxjs';
 
 export const globalHttpErrorInterceptor: HttpInterceptorFn = (req, next) => {
-  const toastService = inject(ToastService);
+	const toastService = inject(ToastService);
 
-  return next(req).pipe(
-    catchError((error: HttpErrorResponse) => {
-      const bypassGlobal = req.context.get(BYPASS_GLOBAL_ERROR);
+	return next(req).pipe(
+		catchError((error: HttpErrorResponse) => {
+			const bypassGlobal = req.context.get(BYPASS_GLOBAL_ERROR);
 
-      if (!bypassGlobal) {
-        let message = error.error.message ?? error.message;
-        const statusCode = error.error.statusCode ?? error.status;
+			if (!bypassGlobal) {
+				let message = error.error.message ?? error.message;
+				const statusCode = error.error.statusCode ?? error.status;
 
-        switch (statusCode) {
-          case 502:
-          case 503:
-          case 504:
-            message = 'Сервис временно недоступен. Попробуйте позже';
-            break;
-          case 413:
-            message = 'Размер загружаемого файла слишком большой';
-            break;
-        }
+				switch (statusCode) {
+					case 502:
+					case 503:
+					case 504:
+						message = 'Сервис временно недоступен. Попробуйте позже';
+						break;
+					case 413:
+						message = 'Размер загружаемого файла слишком большой';
+						break;
+				}
 
-        toastService.show(ErrorToastComponent, { message: message });
-      }
+				toastService.show(ErrorToastComponent, { message: message });
+			}
 
-      return throwError(() => error);
-    }),
-  );
+			return throwError(() => error);
+		})
+	);
 };

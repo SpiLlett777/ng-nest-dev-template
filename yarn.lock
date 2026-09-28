@@ -780,6 +780,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/generator@npm:^7.26.2, @babel/generator@npm:^7.29.8":
+  version: 7.29.8
+  resolution: "@babel/generator@npm:7.29.8"
+  dependencies:
+    "@babel/parser": "npm:^7.29.8"
+    "@babel/types": "npm:^7.29.8"
+    "@jridgewell/gen-mapping": "npm:^0.3.12"
+    "@jridgewell/trace-mapping": "npm:^0.3.28"
+    jsesc: "npm:^3.0.2"
+  checksum: 10c0/7b896696314a659652393b76d78276e236acd0f7fae40a9a1af7f01c76aeafc630dd0966aad6f9386d35d7c674a8e6e2d8e217c44d25fb11460e68afa9ba8441
+  languageName: node
+  linkType: hard
+
 "@babel/generator@npm:^7.27.5, @babel/generator@npm:^7.28.6, @babel/generator@npm:^7.29.7":
   version: 7.29.7
   resolution: "@babel/generator@npm:7.29.7"
@@ -1226,6 +1239,17 @@ __metadata:
   bin:
     parser: ./bin/babel-parser.js
   checksum: 10c0/65133038f80b54a714d6027cb77cee3f9a6b5c4c6842ce674301e13947cbcbfa8055e63acaf1b84c085d34226a14425b2c2b97b829e0e226d2e8f1299942a51d
+  languageName: node
+  linkType: hard
+
+"@babel/parser@npm:^7.26.2, @babel/parser@npm:^7.29.8":
+  version: 7.29.9
+  resolution: "@babel/parser@npm:7.29.9"
+  dependencies:
+    "@babel/types": "npm:^7.29.8"
+  bin:
+    parser: ./bin/babel-parser.js
+  checksum: 10c0/171b16eb4527cdbbb72cb98710f91acb22356e2c40196ba3b7a1b84efa8c55d0b0992f399c8c675c3e17f67fd133676c5c4118e5f20db243f427c8b29b0c3f40
   languageName: node
   linkType: hard
 
@@ -3218,6 +3242,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/traverse@npm:^7.25.9":
+  version: 7.29.8
+  resolution: "@babel/traverse@npm:7.29.8"
+  dependencies:
+    "@babel/code-frame": "npm:^7.29.7"
+    "@babel/generator": "npm:^7.29.8"
+    "@babel/helper-globals": "npm:^7.29.7"
+    "@babel/parser": "npm:^7.29.8"
+    "@babel/template": "npm:^7.29.7"
+    "@babel/types": "npm:^7.29.8"
+    debug: "npm:^4.3.1"
+  checksum: 10c0/87a28989c434add26d787776ac6d30f749b89cb030f2a605c89f671a516a6fa165ac0476f07e2b69feed70128b2734cae1cbbf41dfe95ccf22081bd8f8b91923
+  languageName: node
+  linkType: hard
+
 "@babel/traverse@npm:^8.0.0, @babel/traverse@npm:^8.0.5, @babel/traverse@npm:^8.0.6":
   version: 8.0.6
   resolution: "@babel/traverse@npm:8.0.6"
@@ -3240,6 +3279,16 @@ __metadata:
     "@babel/helper-string-parser": "npm:^7.29.7"
     "@babel/helper-validator-identifier": "npm:^7.29.7"
   checksum: 10c0/b6623994c69717fa27294f5fa46d59140338e2d86c6c1c13085c84ef7d53086ee357fbf4fe9abe3dd3da75734dc77c4c0df2f90fb29e667558bb3b3fb705e88f
+  languageName: node
+  linkType: hard
+
+"@babel/types@npm:^7.26.0, @babel/types@npm:^7.29.8":
+  version: 7.29.8
+  resolution: "@babel/types@npm:7.29.8"
+  dependencies:
+    "@babel/helper-string-parser": "npm:^7.29.7"
+    "@babel/helper-validator-identifier": "npm:^7.29.7"
+  checksum: 10c0/be7c279f0abf2a086c633e21b49c7ca80275d05283cc5a268b67a708c9914bd0c944f1422b3eb3cb37682a2af5d560abf520ccf9b01b53ecbfe6b71fbc3fdde6
   languageName: node
   linkType: hard
 
@@ -4313,6 +4362,34 @@ __metadata:
   version: 0.4.3
   resolution: "@humanwhocodes/retry@npm:0.4.3"
   checksum: 10c0/3775bb30087d4440b3f7406d5a057777d90e4b9f435af488a4923ef249e93615fb78565a85f173a186a076c7706a81d0d57d563a2624e4de2c5c9c66c486ce42
+  languageName: node
+  linkType: hard
+
+"@ianvs/prettier-plugin-sort-imports@npm:^4.7.1":
+  version: 4.7.1
+  resolution: "@ianvs/prettier-plugin-sort-imports@npm:4.7.1"
+  dependencies:
+    "@babel/generator": "npm:^7.26.2"
+    "@babel/parser": "npm:^7.26.2"
+    "@babel/traverse": "npm:^7.25.9"
+    "@babel/types": "npm:^7.26.0"
+    semver: "npm:^7.5.2"
+  peerDependencies:
+    "@prettier/plugin-oxc": ^0.0.4 || ^0.1.0
+    "@vue/compiler-sfc": 2.7.x || 3.x
+    content-tag: ^4.0.0
+    prettier: 2 || 3 || ^4.0.0-0
+    prettier-plugin-ember-template-tag: ^2.1.0
+  peerDependenciesMeta:
+    "@prettier/plugin-oxc":
+      optional: true
+    "@vue/compiler-sfc":
+      optional: true
+    content-tag:
+      optional: true
+    prettier-plugin-ember-template-tag:
+      optional: true
+  checksum: 10c0/cda335ef13b4f95825c7667a4962bd679c0065863572f9d3bd715f2d2a463e56e93808dc7b5c24ecca33d63ddf2159780cfdb3d78f30c828b6efb054972dfc5b
   languageName: node
   linkType: hard
 
@@ -16902,6 +16979,7 @@ __metadata:
     "@commitlint/config-conventional": "npm:^20.5.3"
     "@compodoc/compodoc": "npm:^1.1.26"
     "@eslint/js": "npm:^9.8.0"
+    "@ianvs/prettier-plugin-sort-imports": "npm:^4.7.1"
     "@nestjs/common": "npm:^11.0.0"
     "@nestjs/config": "npm:^4.0.4"
     "@nestjs/core": "npm:^11.0.0"

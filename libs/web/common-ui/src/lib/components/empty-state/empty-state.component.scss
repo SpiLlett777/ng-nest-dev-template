@@ -1,45 +1,45 @@
 @use 'functions' as *;
 
 :host {
-  display: block;
+	display: block;
 }
 
 .empty-state {
-  display: grid;
-  min-height: rem(180);
-  place-content: center;
-  gap: rem(10);
-  padding: rem(24);
-  text-align: center;
-  border: rem(1) solid var(--border-popover-color);
-  border-radius: rem(20);
-  background-color: var(--bg-surface-light-color);
-  color: var(--text-popover-muted-color);
-  box-shadow: 0 rem(4) rem(12) rgb(from var(--shadow-color) r g b / 5%);
+	display: grid;
+	min-height: rem(180);
+	place-content: center;
+	gap: rem(10);
+	padding: rem(24);
+	text-align: center;
+	border: rem(1) solid var(--border-popover-color);
+	border-radius: rem(20);
+	background-color: var(--bg-surface-light-color);
+	color: var(--text-popover-muted-color);
+	box-shadow: 0 rem(4) rem(12) rgb(from var(--shadow-color) r g b / 5%);
 
-  strong {
-    color: var(--dark-color);
-    font-size: rem(19);
-  }
+	strong {
+		color: var(--dark-color);
+		font-size: rem(19);
+	}
 }
 
 .empty-state__action {
-  color: var(--btn-secondary-text-color);
-  font-weight: 700;
+	color: var(--btn-secondary-text-color);
+	font-weight: 700;
 
-  &:empty {
-    display: none;
-  }
+	&:empty {
+		display: none;
+	}
 
-  a,
-  button {
-    color: var(--text-muted-color);
-    text-decoration: underline;
-    font-weight: 700;
-    transition: color 0.2s ease;
+	a,
+	button {
+		color: var(--text-muted-color);
+		text-decoration: underline;
+		font-weight: 700;
+		transition: color 0.2s ease;
 
-    &:hover {
-      color: var(--btn-secondary-text-color);
-    }
-  }
+		&:hover {
+			color: var(--btn-secondary-text-color);
+		}
+	}
 }

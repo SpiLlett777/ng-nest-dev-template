@@ -1,5 +1,5 @@
-import { CollapsibleDirective } from './collapsible.directive';
 import { ClickOutsideDirective } from './click-outside.directive';
+import { CollapsibleDirective } from './collapsible.directive';
 
 export { ClickOutsideDirective, CollapsibleDirective };
 export * from './unsaved-changes.directive';

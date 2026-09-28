@@ -3,49 +3,49 @@
 @use 'mixins' as *;
 
 .register-form {
-  width: fluid(570, 290);
+	width: fluid(570, 290);
 }
 
 .register-form .button {
-  transition: opacity 0.2s ease;
+	transition: opacity 0.2s ease;
 
-  &,
-  &:hover:not(:disabled),
-  &:active:not(:disabled) {
-    box-shadow: none;
-    transform: none;
-    filter: none;
-  }
+	&,
+	&:hover:not(:disabled),
+	&:active:not(:disabled) {
+		box-shadow: none;
+		transform: none;
+		filter: none;
+	}
 
-  &:hover:not(:disabled) {
-    opacity: 0.9;
-  }
+	&:hover:not(:disabled) {
+		opacity: 0.9;
+	}
 }
 
 .registration-header {
-  color: var(--text-primary-color);
-  @include fluid-text(32, 18);
-  line-height: fluid(37, 21);
-  font-family: 'Platypi', serif;
-  font-weight: 400;
-  margin-bottom: fluid(46, 27);
+	color: var(--text-primary-color);
+	@include fluid-text(32, 18);
+	line-height: fluid(37, 21);
+	font-family: 'Platypi', serif;
+	font-weight: 400;
+	margin-bottom: fluid(46, 27);
 }
 
 .registration-body {
-  display: grid;
-  grid-gap: fluid(30, 16);
-  font-family: 'Play', sans-serif;
-  @include fluid-text(20, 14);
-  line-height: fluid(23, 16);
-  margin-bottom: rem(21);
+	display: grid;
+	grid-gap: fluid(30, 16);
+	font-family: 'Play', sans-serif;
+	@include fluid-text(20, 14);
+	line-height: fluid(23, 16);
+	margin-bottom: rem(21);
 }
 
 .register-link {
-  @include flex-center();
-  font-size: rem(11);
-  color: var(--text-primary-color);
+	@include flex-center();
+	font-size: rem(11);
+	color: var(--text-primary-color);
 
-  a {
-    color: var(--text-secondary-color);
-  }
+	a {
+		color: var(--text-secondary-color);
+	}
 }
