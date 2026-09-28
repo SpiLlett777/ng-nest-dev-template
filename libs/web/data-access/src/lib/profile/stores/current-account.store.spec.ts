@@ -33,7 +33,7 @@ describe('CurrentAccountStore', () => {
       avatarUrl: null,
       bio: 'Профессиональный атлет. Рекламные интеграции.',
       birthDate: '1995-03-15T00:00:00.000Z',
-      status: UserStatus.active,
+      status: UserStatus.ACTIVE,
       roles: [PlatformRole.CONTENT_MANAGER],
       emailVerifiedAt: '2026-01-10T00:00:00.000Z',
       phoneVerifiedAt: null,

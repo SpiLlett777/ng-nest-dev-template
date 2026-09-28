@@ -6,7 +6,7 @@ import { UserResponseDto } from '@sl/shared/users';
 export class UsersService {
   constructor(private readonly prisma: PrismaMainService) {}
 
-  async getMe(userId: number) {
+  async getMe(userId: string) {
     const user = await this.prisma.user.findUnique({
       where: { id: userId.toString() },
       include: {

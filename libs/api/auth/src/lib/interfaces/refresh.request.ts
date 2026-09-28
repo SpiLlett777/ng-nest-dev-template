@@ -1,9 +1,9 @@
 import { Request } from 'express';
 
 export interface RefreshPayload {
-  userId: number;
-  accountId: number;
-  sessionId: number;
+  userId: string;
+  accountId: string;
+  sessionId: string;
 }
 
 export interface RefreshRequest extends Request {

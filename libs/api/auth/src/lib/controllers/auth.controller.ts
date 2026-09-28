@@ -8,7 +8,6 @@ import {
   Post,
   Put,
   Param,
-  ParseIntPipe,
   Req,
   Res,
   UseGuards,
@@ -61,10 +60,21 @@ export class AuthController {
     setAuthCookies(res, { accessToken, refreshToken });
 
     const result: UserResponseDto = {
+      avatarUrl: user.avatarUrl,
+      bio: user.bio,
+      birthDate: user.birthDate?.toISOString() ?? '',
+      createdAt: user.createdAt?.toISOString() ?? '',
+      emailVerifiedAt: user.emailVerifiedAt?.toISOString() ?? '',
+      firstName: user.firstName,
+      lastName: user.lastName,
+      middleName: user.middleName,
+      phone: user.phone,
+      phoneVerifiedAt: user.phoneVerifiedAt?.toISOString() ?? '',
+      updatedAt: '',
       id: user.id,
       email: user.email,
       username: user.username,
-      role: user.role,
+      roles: user.platformRoles.map((pr) => pr.role),
       status: user.status,
     };
 
@@ -95,10 +105,21 @@ export class AuthController {
     setAuthCookies(res, { accessToken, refreshToken });
 
     const result: UserResponseDto = {
+      avatarUrl: user.avatarUrl,
+      bio: user.bio,
+      birthDate: user.birthDate?.toISOString() ?? '',
+      createdAt: user.createdAt?.toISOString() ?? '',
+      emailVerifiedAt: user.emailVerifiedAt?.toISOString() ?? '',
+      firstName: user.firstName,
+      lastName: user.lastName,
+      middleName: user.middleName,
+      phone: user.phone,
+      phoneVerifiedAt: user.phoneVerifiedAt?.toISOString() ?? '',
+      updatedAt: '',
       id: user.id,
       email: user.email,
       username: user.username,
-      role: user.role,
+      roles: [],
       status: user.status,
     };
 
@@ -218,7 +239,7 @@ export class AuthController {
   @ApiBadRequestResponse({ description: 'Invalid session ID' })
   async deleteSession(
     @Req() req: RefreshRequest,
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id') id: string,
     @Res({ passthrough: true }) res: Response,
   ) {
     await this.authService.logoutSession(req.user.userId, id);

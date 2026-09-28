@@ -50,7 +50,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
       select: { status: true },
     });
 
-    if (!user || user.status === UserStatus.blocked)
+    if (!user || user.status === UserStatus.BLOCKED)
       throw new UnauthorizedException('Account is unavailable');
 
     const session = await this.prisma.userSession.findFirst({

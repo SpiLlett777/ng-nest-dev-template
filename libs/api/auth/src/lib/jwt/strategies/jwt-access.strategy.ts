@@ -58,7 +58,7 @@ export class JwtAccessStrategy extends PassportStrategy(
       select: { role: true, status: true },
     });
 
-    if (!user || user.status === UserStatus.blocked)
+    if (!user || user.status === UserStatus.BLOCKED)
       throw new UnauthorizedException('Account is unavailable');
 
     return {

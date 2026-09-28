@@ -29,8 +29,8 @@ export class AccountSettingsStore {
   );
   readonly loading = signal(false);
   readonly savingPassword = signal(false);
-  readonly endingSession = signal<number | null>(null);
-  readonly confirmationId = signal<number | null>(null);
+  readonly endingSession = signal<string | null>(null);
+  readonly confirmationId = signal<string | null>(null);
   readonly sessionError = signal('');
   readonly passwordError = signal('');
   readonly passwordSuccess = signal('');
@@ -59,7 +59,7 @@ export class AccountSettingsStore {
       });
   }
 
-  endSession(id: number) {
+  endSession(id: string) {
     if (this.busy()) return;
     const session = this.#sessions().find((item) => item.id === id);
     if (!session || this.confirmationId() !== id) return;

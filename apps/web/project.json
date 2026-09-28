@@ -26,11 +26,7 @@
             "input": "public"
           }
         ],
-        "styles": [
-          "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
-          "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
-          "apps/web/src/styles.scss"
-        ],
+        "styles": ["apps/web/src/styles.scss"],
         "stylePreprocessorOptions": {
           "includePaths": ["libs/web/common-ui/src/lib/styles"]
         },

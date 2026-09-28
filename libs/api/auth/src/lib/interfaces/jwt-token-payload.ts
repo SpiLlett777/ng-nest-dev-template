@@ -1,5 +1,5 @@
 export interface JwtTokenPayload {
-  sub: number;
-  accountId: number;
-  sid?: number;
+  sub: string;
+  accountId: string;
+  sid?: string;
 }

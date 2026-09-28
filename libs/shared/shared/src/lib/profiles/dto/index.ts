@@ -1,1 +1,1 @@
-export { ProfileSummaryDto } from './profile-summary.dto';
+export type { ProfileSummaryDto } from './profile-summary.dto';

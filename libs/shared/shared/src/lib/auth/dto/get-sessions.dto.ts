@@ -1,6 +1,6 @@
 export interface GetSessionsDto {
   sessions: {
-    id: number;
+    id: string;
     isCurrent?: boolean;
     userAgent: string | null;
     ip: string | null;

@@ -1,8 +1,8 @@
 import { UserRoleType } from '@sl/shared/users';
 
 export interface AccessPayload {
-  userId: number;
-  profileId: number;
+  userId: string;
+  profileId: string;
   role: UserRoleType;
 }
 

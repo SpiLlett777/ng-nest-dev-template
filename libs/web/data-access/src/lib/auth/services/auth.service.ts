@@ -99,7 +99,7 @@ export class AuthService {
     );
   }
 
-  endSession(id: number, isCurrent: boolean) {
+  endSession(id: string, isCurrent: boolean) {
     return this.#http
       .delete<DefaultResponseDto>(
         `${this.#apiConfig.baseUrl}auth/sessions/${id}`,
